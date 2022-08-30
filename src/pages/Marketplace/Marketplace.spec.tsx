@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import Marketplace from './Marketplace';
 import * as usePizzas from '../../hooks/usePizzas';
 import { TestId } from '../../testUtils/TestId';
 import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestPizzas';
+import { render } from '../../testUtils/render';
 
 jest.mock('../../hooks/usePizzas');
 
