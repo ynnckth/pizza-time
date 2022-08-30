@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^8.0.1",
     "prettier": "2.7.1"
   }
 }

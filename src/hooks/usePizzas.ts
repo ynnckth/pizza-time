@@ -14,7 +14,7 @@ const usePizzas = () => {
       .then((allPizzas) => setPizzas(allPizzas))
       .catch((e) => setErrorLoadingPizzas(e))
       .finally(() => setLoadingPizzas(false));
-  }, []);
+  }, [setLoadingPizzas, setPizzas, setErrorLoadingPizzas]);
 
   return { pizzas, loadingPizzas, errorLoadingPizzas };
 };

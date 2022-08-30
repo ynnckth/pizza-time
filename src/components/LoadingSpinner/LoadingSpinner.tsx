@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, CircularProgress, Typography } from '@mui/material';
+import { TestId } from '../../testUtils/TestId';
 
 interface Props {
   loadingText?: string;
@@ -15,6 +16,7 @@ const LoadingSpinner: React.FC<Props> = ({ loadingText }) => {
         justifyContent: 'center',
         alignItems: 'center',
       }}
+      data-testid={TestId.LOADING_SPINNER}
     >
       <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
         <CircularProgress sx={{ marginBottom: '20px' }} />
