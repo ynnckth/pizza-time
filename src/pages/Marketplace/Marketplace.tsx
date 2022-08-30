@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
-import { Box } from '@mui/material';
-import PizzaCard from './PizzaCard/PizzaCard';
+import { Box, Fab } from '@mui/material';
+import PizzaCard from '../../components/PizzaCard/PizzaCard';
 import usePizzas from '../../hooks/usePizzas';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import toast from 'react-hot-toast';
+import { ShoppingCart } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
-interface Props {}
-
-const Marketplace: React.FC<Props> = () => {
+const Marketplace = () => {
+  const navigate = useNavigate();
   const { pizzas, loadingPizzas, errorLoadingPizzas } = usePizzas();
 
   useEffect(() => {
@@ -31,6 +32,19 @@ const Marketplace: React.FC<Props> = () => {
       {pizzas.map((pizza, key) => (
         <PizzaCard pizza={pizza} key={key} />
       ))}
+      {/* TODO: display number of items in cart next to icon */}
+      <Fab
+        sx={{
+          position: 'fixed',
+          bottom: (theme) => theme.spacing(2),
+          right: (theme) => theme.spacing(2),
+        }}
+        color="primary"
+        aria-label="checkout"
+        onClick={() => navigate('/checkout')}
+      >
+        <ShoppingCart />
+      </Fab>
     </Box>
   );
 };

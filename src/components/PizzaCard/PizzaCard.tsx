@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
-import { Pizza } from '../../../models/Pizza';
-import pizzaImage from '../../../assets/pizza.png';
-import { TestId } from '../../../testUtils/TestId';
+import { Pizza } from '../../models/Pizza';
+import pizzaImage from '../../assets/pizza.png';
+import { TestId } from '../../testUtils/TestId';
 
 interface Props {
   pizza: Pizza;
