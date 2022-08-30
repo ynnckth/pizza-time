@@ -33,6 +33,7 @@ const PizzaCard: React.FC<Props> = ({ pizza }) => {
         <Typography variant={'body1'}>{`$${pizza.unitPrice}`}</Typography>
       </CardContent>
       <CardActions>
+        {/* TODO: add pizza to cart */}
         <Button size="small">Add to cart</Button>
       </CardActions>
     </Card>

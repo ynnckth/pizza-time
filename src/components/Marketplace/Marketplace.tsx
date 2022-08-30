@@ -1,32 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
-import { Pizza } from '../../models/Pizza';
 import PizzaCard from './PizzaCard/PizzaCard';
+import usePizzas from '../../hooks/usePizzas';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import toast from 'react-hot-toast';
 
 interface Props {}
 
 const Marketplace: React.FC<Props> = () => {
-  // TODO: instead fetch from somewhere
-  const allPizzas: Pizza[] = [
-    {
-      name: 'Margherita',
-      description: 'Plain and boring',
-      unitPrice: 10,
-      isAvailable: true,
-    },
-    {
-      name: 'Salami',
-      description: 'Nice and spicy!',
-      unitPrice: 12,
-      isAvailable: true,
-    },
-    {
-      name: 'Hawaii',
-      description: 'Really???',
-      unitPrice: 11,
-      isAvailable: true,
-    },
-  ];
+  const { pizzas, loadingPizzas, errorLoadingPizzas } = usePizzas();
+
+  useEffect(() => {
+    if (errorLoadingPizzas) toast.error(errorLoadingPizzas);
+  }, [errorLoadingPizzas]);
+
+  if (loadingPizzas) {
+    return <LoadingSpinner loadingText={'Retrieving available pizzas ...'} />;
+  }
 
   return (
     <Box
@@ -38,7 +28,7 @@ const Marketplace: React.FC<Props> = () => {
         flexWrap: 'wrap',
       }}
     >
-      {allPizzas.map((pizza, key) => (
+      {pizzas.map((pizza, key) => (
         <PizzaCard pizza={pizza} key={key} />
       ))}
     </Box>

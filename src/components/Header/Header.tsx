@@ -16,7 +16,7 @@ const Header: React.FC<Props> = ({ title }) => {
         alignItems: 'center',
       }}
     >
-      <Typography>{title}</Typography>
+      <Typography variant={'h5'}>{title}</Typography>
     </Box>
   );
 };
