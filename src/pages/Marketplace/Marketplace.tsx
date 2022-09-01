@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
-import { Box, Fab } from '@mui/material';
+import { Box, Fab, Typography } from '@mui/material';
 import PizzaCard from '../../components/PizzaCard/PizzaCard';
 import usePizzas from '../../hooks/usePizzas';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import toast from 'react-hot-toast';
 import { ShoppingCart } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../redux/Hooks';
+import { selectOrderItems } from '../../redux/Slices/CheckoutSlice';
+import { TestId } from '../../testUtils/TestId';
 
 const Marketplace = () => {
   const navigate = useNavigate();
   const { pizzas, loadingPizzas, errorLoadingPizzas } = usePizzas();
+  const orderItems = useAppSelector(selectOrderItems);
 
   useEffect(() => {
     if (errorLoadingPizzas) toast.error(errorLoadingPizzas);
@@ -43,6 +47,7 @@ const Marketplace = () => {
         aria-label="checkout"
         onClick={() => navigate('/checkout')}
       >
+        <Typography data-testid={TestId.MARKETPLACE_NO_OF_ORDER_ITEMS}>{orderItems.length}</Typography>
         <ShoppingCart />
       </Fab>
     </Box>

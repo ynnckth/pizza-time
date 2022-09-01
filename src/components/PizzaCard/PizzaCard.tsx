@@ -26,7 +26,11 @@ const PizzaCard: React.FC<Props> = ({ pizza }) => {
         <Typography variant={'body1'}>{`$${pizza.unitPrice}`}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => dispatch(addOrderItem(pizza))}>
+        <Button
+          size="small"
+          onClick={() => dispatch(addOrderItem(pizza))}
+          data-testid={TestId.MARKETPLACE_ADD_PIZZA_TO_CART}
+        >
           Add to cart
         </Button>
       </CardActions>
