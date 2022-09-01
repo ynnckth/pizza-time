@@ -43,6 +43,10 @@ const Checkout = () => {
       </Box>
 
       <Typography data-testid={TestId.CHECKOUT_TOTAL_PRICE}>{`Total: $${getTotalPrice()}`}</Typography>
+
+      {/* TODO: add a form with user details using formik */}
+
+      {/* TODO: dispatch action that calls API and shows success/error notification and adds order to order history */}
       <Button variant="contained" data-testid={TestId.CHECKOUT_PLACE_ORDER_BUTTON}>
         Place order
       </Button>

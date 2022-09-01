@@ -36,7 +36,6 @@ const Marketplace = () => {
       {pizzas.map((pizza, key) => (
         <PizzaCard pizza={pizza} key={key} />
       ))}
-      {/* TODO: display number of items in cart next to icon */}
       <Fab
         sx={{
           position: 'fixed',
