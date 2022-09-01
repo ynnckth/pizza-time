@@ -1,6 +1,3 @@
-export interface Pizza {
-  name: string;
-  description: string;
-  unitPrice: number;
-  isAvailable: boolean;
-}
+import { OrderItem } from './OrderItem';
+
+export interface Pizza extends OrderItem {}

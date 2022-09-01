@@ -3,7 +3,7 @@ import Marketplace from './Marketplace';
 import * as usePizzas from '../../hooks/usePizzas';
 import { TestId } from '../../testUtils/TestId';
 import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestPizzas';
-import { render } from '../../testUtils/render';
+import { renderWithProviders } from '../../testUtils/renderWithProviders';
 
 jest.mock('../../hooks/usePizzas');
 
@@ -13,7 +13,7 @@ describe('Marketplace', () => {
       .spyOn(usePizzas, 'default')
       .mockImplementation(() => ({ pizzas: [], loadingPizzas: true, errorLoadingPizzas: undefined }));
 
-    render(<Marketplace />);
+    renderWithProviders(<Marketplace />);
 
     expect(screen.getByTestId(TestId.LOADING_SPINNER)).toBeVisible();
     expect(screen.queryByTestId(TestId.MARKETPLACE_PIZZA_CARD)).toBeFalsy();
@@ -26,7 +26,7 @@ describe('Marketplace', () => {
       errorLoadingPizzas: undefined,
     }));
 
-    render(<Marketplace />);
+    renderWithProviders(<Marketplace />);
 
     expect(screen.queryAllByTestId(TestId.MARKETPLACE_PIZZA_CARD)).toHaveLength(2);
     expect(screen.queryByText(pizzaMargherita.name)).toBeVisible();

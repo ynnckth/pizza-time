@@ -21,6 +21,12 @@ export const fetchAllPizzas = (): Promise<Pizza[]> => {
           name: 'Hawaii',
           description: 'Really???',
           unitPrice: 11,
+          isAvailable: false,
+        },
+        {
+          name: 'Pesto Burratina',
+          description: 'Wood-fired thin crust deliciousness',
+          unitPrice: 15,
           isAvailable: true,
         },
       ]);

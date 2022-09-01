@@ -3,12 +3,16 @@ import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@
 import { Pizza } from '../../models/Pizza';
 import pizzaImage from '../../assets/pizza.png';
 import { TestId } from '../../testUtils/TestId';
+import { useAppDispatch } from '../../redux/Hooks';
+import { addOrderItem } from '../../redux/Slices/CheckoutSlice';
 
 interface Props {
   pizza: Pizza;
 }
 
 const PizzaCard: React.FC<Props> = ({ pizza }) => {
+  const dispatch = useAppDispatch();
+
   return (
     <Card sx={{ width: 200, height: 320, margin: 2 }} data-testid={TestId.MARKETPLACE_PIZZA_CARD}>
       <CardMedia component="img" height="140" src={pizzaImage} alt="delicious pizza" />
@@ -22,8 +26,9 @@ const PizzaCard: React.FC<Props> = ({ pizza }) => {
         <Typography variant={'body1'}>{`$${pizza.unitPrice}`}</Typography>
       </CardContent>
       <CardActions>
-        {/* TODO: add pizza to cart */}
-        <Button size="small">Add to cart</Button>
+        <Button size="small" onClick={() => dispatch(addOrderItem(pizza))}>
+          Add to cart
+        </Button>
       </CardActions>
     </Card>
   );
