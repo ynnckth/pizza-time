@@ -30,7 +30,14 @@ export const checkoutSlice = createSlice({
     addOrderItem: (state, action: PayloadAction<OrderItem>) => {
       state.orderItems.push(action.payload);
     },
-    // TODO (low): implement reducer for removeOrderItem
+    removeOrderItem: (state, action: PayloadAction<OrderItem>) => {
+      const filtered = state.orderItems.filter((orderItem) => orderItem.name === action.payload.name);
+      filtered.pop();
+      state.orderItems = [
+        ...state.orderItems.filter((orderItem) => orderItem.name !== action.payload.name),
+        ...filtered,
+      ];
+    },
   },
   // Provides methods that let us define additional case reducers that will run in response to actions defined outside of the slice
   extraReducers: (builder) => {
@@ -54,7 +61,7 @@ export const checkoutSlice = createSlice({
   },
 });
 
-export const { addOrderItem } = checkoutSlice.actions;
+export const { addOrderItem, removeOrderItem } = checkoutSlice.actions;
 
 export const selectOrderItems = (state: RootState) => state.checkout.orderItems;
 export const selectPastOrders = (state: RootState) => state.checkout.pastOrders;

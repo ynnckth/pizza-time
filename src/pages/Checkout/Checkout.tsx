@@ -7,6 +7,7 @@ import {
   selectOrderItems,
   selectPlaceOrderError,
   selectPlaceOrderStatus,
+  removeOrderItem,
 } from '../../redux/Slices/CheckoutSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/Hooks';
 import { TestId } from '../../testUtils/TestId';
@@ -66,23 +67,34 @@ const Checkout = () => {
       <Typography>Please review your order</Typography>
       <Box sx={{ maxWidth: 500 }}>
         <List>
-          {orderItems.map((item, idx) => (
-            <ListItem
-              key={`checkout-order-item-${idx}`}
-              secondaryAction={
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Typography>{`$${item.unitPrice}`}</Typography>
-                  <IconButton edge="end" aria-label="delete" onClick={() => alert('Not yet implemented!')}>
-                    {/* TODO (mid): implement option to delete */}
-                    <Delete />
-                  </IconButton>
-                </Box>
-              }
-              data-testid={TestId.CHECKOUT_ORDER_ITEM}
-            >
-              <ListItemText primary={`Pizza ${item.name}`} />
-            </ListItem>
-          ))}
+          {orderItems
+            .map((item) => item) // need to copy since sort mutates the list which is immutable
+            .sort((a, b) => {
+              if (a.name < b.name) return -1;
+              if (a.name > b.name) return 1;
+              return 0;
+            })
+            .map((item, idx) => (
+              <ListItem
+                key={`checkout-order-item-${idx}`}
+                secondaryAction={
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Typography>{`$${item.unitPrice}`}</Typography>
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => dispatch(removeOrderItem(item))}
+                      data-testid={TestId.CHECKOUT_REMOVE_ORDER_ITEM}
+                    >
+                      <Delete />
+                    </IconButton>
+                  </Box>
+                }
+                data-testid={TestId.CHECKOUT_ORDER_ITEM}
+              >
+                <ListItemText primary={`Pizza ${item.name}`} />
+              </ListItem>
+            ))}
         </List>
       </Box>
 

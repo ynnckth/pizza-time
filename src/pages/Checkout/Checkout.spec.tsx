@@ -39,6 +39,32 @@ describe('Checkout', () => {
     expect(screen.queryByTestId(TestId.CHECKOUT_PLACE_ORDER_BUTTON)).toBeVisible();
   });
 
+  it('should remove unique order items from the list', async () => {
+    const orderItems = [pizzaMargherita, pizzaSalami];
+    renderWithProviders(<Checkout />, {
+      preloadedState: { checkout: { ...initialCheckoutState, orderItems: orderItems } },
+    });
+
+    fireEvent.click(screen.queryAllByTestId(TestId.CHECKOUT_REMOVE_ORDER_ITEM)[0]);
+
+    await waitFor(() =>
+      expect(screen.queryAllByTestId(TestId.CHECKOUT_ORDER_ITEM)).toHaveLength(orderItems.length - 1)
+    );
+  });
+
+  it('should remove duplicate order items from the list', async () => {
+    const orderItems = [pizzaMargherita, pizzaMargherita, pizzaSalami, pizzaSalami];
+    renderWithProviders(<Checkout />, {
+      preloadedState: { checkout: { ...initialCheckoutState, orderItems: orderItems } },
+    });
+
+    fireEvent.click(screen.queryAllByTestId(TestId.CHECKOUT_REMOVE_ORDER_ITEM)[0]);
+
+    await waitFor(() =>
+      expect(screen.queryAllByTestId(TestId.CHECKOUT_ORDER_ITEM)).toHaveLength(orderItems.length - 1)
+    );
+  });
+
   it('should redirect to past orders page and show success toast after successfully placed order', async () => {
     jest.useFakeTimers();
     renderWithProviders(<Checkout />, {
