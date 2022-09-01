@@ -1,10 +1,10 @@
 import usePizzas from './usePizzas';
-import * as PizzaApi from '../api/PizzaApi';
+import * as PizzaApi from '../api/Pizza/PizzaApi';
 import { Pizza } from '../models/Pizza';
 import { renderHook } from '@testing-library/react-hooks';
 import { waitFor } from '@testing-library/react';
 
-jest.mock('../api/PizzaApi');
+jest.mock('../api/Pizza/PizzaApi');
 
 describe('usePizzas', () => {
   it('should return pizzas with loading state false and undefined error state', async () => {

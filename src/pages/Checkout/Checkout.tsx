@@ -1,17 +1,52 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Box, Button, Container, IconButton, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { Delete } from '@mui/icons-material';
-import { selectOrderItems } from '../../redux/Slices/CheckoutSlice';
-import { useAppSelector } from '../../redux/Hooks';
+import {
+  placeOrder,
+  selectPastOrders,
+  selectOrderItems,
+  selectPlaceOrderError,
+  selectPlaceOrderStatus,
+} from '../../redux/Slices/CheckoutSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/Hooks';
 import { TestId } from '../../testUtils/TestId';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { Page } from '../../Navigation';
+import { calculateTotalOrderPrice } from '../../utils/calculateTotalOrderPrice';
 
 // TODO: add back button to overview
 const Checkout = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const orderItems = useAppSelector(selectOrderItems);
+  const placeOrderError = useAppSelector(selectPlaceOrderError);
+  const placeOrderStatus = useAppSelector(selectPlaceOrderStatus);
+  const orderHistory = useAppSelector(selectPastOrders);
 
   const getTotalPrice = useCallback(() => {
-    return orderItems.map((item) => item.unitPrice).reduce((sum, i) => sum + i, 0);
+    return calculateTotalOrderPrice(orderItems);
   }, [orderItems]);
+
+  useEffect(() => {
+    if (placeOrderError && placeOrderStatus === 'failed') toast.error(placeOrderError);
+  }, [placeOrderError, placeOrderStatus]);
+
+  useEffect(() => {
+    if (placeOrderStatus === 'successful' && !placeOrderError) {
+      toast.success('Successfully placed order');
+      navigate(Page.ORDER_HISTORY);
+    }
+  }, [orderHistory, placeOrderStatus]);
+
+  const validateAndPlaceOrder = () => {
+    if (orderItems.length < 1) {
+      alert('Cannot place order since your cart is empty!');
+      return;
+    }
+    dispatch(placeOrder({ orderItems: orderItems }));
+  };
 
   if (orderItems.length < 1) {
     return <Typography data-testid={TestId.CHECKOUT_EMPTY_CART_MESSAGE}>Your cart is empty.</Typography>;
@@ -46,8 +81,11 @@ const Checkout = () => {
 
       {/* TODO: add a form with user details using formik */}
 
-      {/* TODO: dispatch action that calls API and shows success/error notification and adds order to order history */}
-      <Button variant="contained" data-testid={TestId.CHECKOUT_PLACE_ORDER_BUTTON}>
+      <Button
+        variant="contained"
+        onClick={() => validateAndPlaceOrder()}
+        data-testid={TestId.CHECKOUT_PLACE_ORDER_BUTTON}
+      >
         Place order
       </Button>
     </Container>

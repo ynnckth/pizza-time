@@ -5,6 +5,7 @@ import Marketplace from './pages/Marketplace/Marketplace';
 import { Toaster } from 'react-hot-toast';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Checkout from './pages/Checkout/Checkout';
+import OrderHistory from './pages/OrderHistory/OrderHistory';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Routes>
           <Route path="marketplace" element={<Marketplace />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="orders" element={<OrderHistory />} />
           <Route path="*" element={<Navigate replace to="/marketplace" />} />
         </Routes>
       </Box>

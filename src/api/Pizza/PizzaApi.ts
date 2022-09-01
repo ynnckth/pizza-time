@@ -1,4 +1,4 @@
-import { Pizza } from '../models/Pizza';
+import { Pizza } from '../../models/Pizza';
 
 export const fetchAllPizzas = (): Promise<Pizza[]> => {
   return new Promise((resolve, reject) =>
@@ -30,6 +30,6 @@ export const fetchAllPizzas = (): Promise<Pizza[]> => {
           isAvailable: true,
         },
       ]);
-    }, 3000)
+    }, 1000)
   );
 };

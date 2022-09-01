@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../redux/Hooks';
 import { selectOrderItems } from '../../redux/Slices/CheckoutSlice';
 import { TestId } from '../../testUtils/TestId';
+import { Page } from '../../Navigation';
 
 const Marketplace = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const Marketplace = () => {
         }}
         color="primary"
         aria-label="checkout"
-        onClick={() => navigate('/checkout')}
+        onClick={() => navigate(Page.CHECKOUT)}
       >
         <Typography data-testid={TestId.MARKETPLACE_NO_OF_ORDER_ITEMS}>{orderItems.length}</Typography>
         <ShoppingCart />
