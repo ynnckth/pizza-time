@@ -1,11 +1,22 @@
 import { renderWithProviders } from '../../testUtils/renderWithProviders';
-import Checkout from './Checkout';
-import { screen } from '@testing-library/react';
+import Checkout, { PLACE_ORDER_SUCCESS_MESSAGE } from './Checkout';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { TestId } from '../../testUtils/TestId';
 import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestPizzas';
 import { initialCheckoutState } from '../../redux/Slices/CheckoutSlice';
+import { Page } from '../../Navigation';
+
+const mockNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...(jest.requireActual('react-router-dom') as any),
+  useNavigate: () => mockNavigate,
+}));
 
 describe('Checkout', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should show empty cart message if no order items present', () => {
     renderWithProviders(<Checkout />);
 
@@ -26,5 +37,19 @@ describe('Checkout', () => {
     expect(screen.queryAllByTestId(TestId.CHECKOUT_ORDER_ITEM)).toHaveLength(orderItems.length);
     expect(screen.queryByTestId(TestId.CHECKOUT_TOTAL_PRICE)).toHaveTextContent(`$${expectedTotalPrice}`);
     expect(screen.queryByTestId(TestId.CHECKOUT_PLACE_ORDER_BUTTON)).toBeVisible();
+  });
+
+  it('should redirect to past orders page and show success toast after successfully placed order', async () => {
+    jest.useFakeTimers();
+    renderWithProviders(<Checkout />, {
+      preloadedState: { checkout: { ...initialCheckoutState, orderItems: [pizzaMargherita, pizzaSalami] } },
+    });
+    fireEvent.click(screen.getByTestId(TestId.CHECKOUT_PLACE_ORDER_BUTTON));
+
+    await waitFor(() => expect(screen.getByTestId(TestId.LOADING_SPINNER)).toBeVisible());
+    jest.runOnlyPendingTimers();
+    await waitFor(() => expect(screen.queryByTestId(TestId.LOADING_SPINNER)).toBeFalsy());
+    await waitFor(() => expect(screen.getByText(PLACE_ORDER_SUCCESS_MESSAGE)).toBeVisible());
+    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith(Page.PAST_ORDERS));
   });
 });

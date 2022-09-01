@@ -10,12 +10,15 @@ import {
 } from '../../redux/Slices/CheckoutSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/Hooks';
 import { TestId } from '../../testUtils/TestId';
-import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../Navigation';
 import { calculateTotalOrderPrice } from '../../utils/calculateTotalOrderPrice';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import { toast } from 'react-toastify';
 
-// TODO: add back button to overview
+export const PLACE_ORDER_SUCCESS_MESSAGE = 'Successfully placed order';
+
+// TODO (low): add back button to overview
 const Checkout = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -30,15 +33,17 @@ const Checkout = () => {
   }, [orderItems]);
 
   useEffect(() => {
-    if (placeOrderError && placeOrderStatus === 'failed') toast.error(placeOrderError);
+    if (placeOrderError && placeOrderStatus === 'failed') {
+      toast.error(placeOrderError);
+    }
   }, [placeOrderError, placeOrderStatus]);
 
   useEffect(() => {
     if (placeOrderStatus === 'successful' && !placeOrderError) {
-      toast.success('Successfully placed order');
-      navigate(Page.ORDER_HISTORY);
+      toast.success(PLACE_ORDER_SUCCESS_MESSAGE);
+      navigate(Page.PAST_ORDERS);
     }
-  }, [orderHistory, placeOrderStatus]);
+  }, [orderHistory, placeOrderStatus, navigate, placeOrderError]);
 
   const validateAndPlaceOrder = () => {
     if (orderItems.length < 1) {
@@ -50,6 +55,10 @@ const Checkout = () => {
 
   if (orderItems.length < 1) {
     return <Typography data-testid={TestId.CHECKOUT_EMPTY_CART_MESSAGE}>Your cart is empty.</Typography>;
+  }
+
+  if (placeOrderStatus === 'loading') {
+    return <LoadingSpinner loadingText={'Placing your order ...'} />;
   }
 
   return (
@@ -64,7 +73,7 @@ const Checkout = () => {
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Typography>{`$${item.unitPrice}`}</Typography>
                   <IconButton edge="end" aria-label="delete" onClick={() => alert('Not yet implemented!')}>
-                    {/* TODO: implement option to delete */}
+                    {/* TODO (mid): implement option to delete */}
                     <Delete />
                   </IconButton>
                 </Box>
@@ -79,7 +88,7 @@ const Checkout = () => {
 
       <Typography data-testid={TestId.CHECKOUT_TOTAL_PRICE}>{`Total: $${getTotalPrice()}`}</Typography>
 
-      {/* TODO: add a form with user details using formik */}
+      {/* TODO (high): add a form with user details using formik */}
 
       <Button
         variant="contained"

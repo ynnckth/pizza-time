@@ -1,8 +1,8 @@
 import { OrderItem } from '../../models/OrderItem';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../Store';
-import { PlaceOrderRequest, PlaceOrderResponse } from '../../api/Checkout/PlaceOrderDto';
-import { placeOrder as placeOrderApi } from '../../api/Checkout/CheckoutApi';
+import { PlaceOrderRequest, PlaceOrderResponse } from '../../api/Order/PlaceOrderDto';
+import { placeOrder as placeOrderApi } from '../../api/Order/OrderApi';
 
 export interface CheckoutState {
   orderItems: OrderItem[];
@@ -18,7 +18,7 @@ export const initialCheckoutState: CheckoutState = {
   pastOrders: [],
 };
 
-// TODO: explore RTK Query data fetching API as an alternative to writing thunks for data fetching
+// TODO (high): explore RTK Query data fetching API as an alternative to writing thunks for data fetching
 export const placeOrder = createAsyncThunk('checkout/placeOrder', async (placeOrderRequest: PlaceOrderRequest) => {
   return placeOrderApi(placeOrderRequest);
 });

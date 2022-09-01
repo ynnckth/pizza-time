@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { PreloadedState } from '@reduxjs/toolkit';
 import { AppStore, RootState, setupStore } from '../redux/Store';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
@@ -27,6 +28,7 @@ export const renderWithProviders = (
   return render(
     <Provider store={store}>
       <BrowserRouter>{component}</BrowserRouter>
+      <ToastContainer position="bottom-center" hideProgressBar={true} closeOnClick />
     </Provider>,
     renderOptions
   );

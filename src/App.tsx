@@ -2,7 +2,6 @@ import React from 'react';
 import { Box } from '@mui/material';
 import Header from './components/Header/Header';
 import Marketplace from './pages/Marketplace/Marketplace';
-import { Toaster } from 'react-hot-toast';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Checkout from './pages/Checkout/Checkout';
 import OrderHistory from './pages/OrderHistory/OrderHistory';
@@ -19,7 +18,6 @@ const App = () => {
           <Route path="*" element={<Navigate replace to="/marketplace" />} />
         </Routes>
       </Box>
-      <Toaster position={'bottom-center'} />
     </Box>
   );
 };

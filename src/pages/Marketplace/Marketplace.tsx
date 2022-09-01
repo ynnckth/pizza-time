@@ -3,13 +3,13 @@ import { Box, Fab, Typography } from '@mui/material';
 import PizzaCard from '../../components/PizzaCard/PizzaCard';
 import usePizzas from '../../hooks/usePizzas';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-import toast from 'react-hot-toast';
 import { ShoppingCart } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../redux/Hooks';
 import { selectOrderItems } from '../../redux/Slices/CheckoutSlice';
 import { TestId } from '../../testUtils/TestId';
 import { Page } from '../../Navigation';
+import { toast } from 'react-toastify';
 
 const Marketplace = () => {
   const navigate = useNavigate();

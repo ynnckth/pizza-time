@@ -4,10 +4,11 @@ import { useAppSelector } from '../../redux/Hooks';
 import { selectPastOrders } from '../../redux/Slices/CheckoutSlice';
 import { calculateTotalOrderPrice } from '../../utils/calculateTotalOrderPrice';
 
-// TODO: add navigation button to get back to market place
+// TODO (low): add navigation button to get back to market place
 const OrderHistory = () => {
   const pastOrders = useAppSelector(selectPastOrders);
 
+  // TODO (mid): pretty display past orders
   return (
     <Container maxWidth={'sm'}>
       <Typography>Your past orders</Typography>
