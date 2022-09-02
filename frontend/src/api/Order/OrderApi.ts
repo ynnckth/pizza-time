@@ -1,32 +1,19 @@
-import { PlaceOrderRequest, PlaceOrderResponse } from './PlaceOrderDto';
-import { v4 as uuidv4 } from 'uuid';
-import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestPizzas';
+import {PlaceOrderRequest, PlaceOrderResponse} from './PlaceOrderDto';
 
-export const fetchPastOrders = (): Promise<PlaceOrderResponse[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        {
-          orderId: uuidv4(),
-          orderItems: [pizzaMargherita],
-        },
-        {
-          orderId: uuidv4(),
-          orderItems: [pizzaMargherita, pizzaSalami],
-        },
-      ]);
-    }, 2000);
-  });
+const baseUrl = '/api/orders';
+
+export const fetchPastOrders = async (): Promise<PlaceOrderResponse[]> => {
+  const response = await fetch(baseUrl);
+  return response.json();
 };
 
-export const placeOrder = (placeOrderRequest: PlaceOrderRequest): Promise<PlaceOrderResponse> => {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      // reject('Something went wrong placing your order!');
-      resolve({
-        orderId: uuidv4(),
-        orderItems: placeOrderRequest.orderItems,
-      });
-    }, 3000)
-  );
+export const placeOrder = async (placeOrderRequest: PlaceOrderRequest): Promise<PlaceOrderResponse> => {
+  const response = await fetch(baseUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(placeOrderRequest)
+  });
+  return response.json();
 };

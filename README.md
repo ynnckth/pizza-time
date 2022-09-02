@@ -10,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # Install dependencies:
 npm install
 
-# Run in development mode:
+# Run in development mode (on port 3000):
 npm start
 
 # Run tests: 

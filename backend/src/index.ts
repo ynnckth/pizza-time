@@ -1,7 +1,23 @@
 import express from 'express';
+import {pizzaMargherita, pizzaSalami} from './TestPizzas';
+import {PlaceOrderResponse} from './models/PlaceOrderDto';
+import {v4 as uuidv4} from 'uuid';
 
 const app = express();
+app.use(express.json())
+
 const port = 3001;
+
+const pastOrders: PlaceOrderResponse[] = [
+  {
+    orderId: "a367772a-eda3-4057-95f9-a26a83b15f62",
+    orderItems: [pizzaMargherita],
+  },
+  {
+    orderId: "49ab46a0-acdf-4845-8a6f-b50eb2e8ecb0",
+    orderItems: [pizzaMargherita, pizzaSalami],
+  },
+];
 
 app.get('/api/pizzas', (req, res) => {
   res.send([
@@ -30,6 +46,16 @@ app.get('/api/pizzas', (req, res) => {
       isAvailable: true,
     },
   ]);
+});
+
+app.get('/api/orders', (req, res) => {
+  res.send(pastOrders);
+});
+
+app.post('/api/orders', (req, res) => {
+  const newOrder = {...req.body, orderId: uuidv4()} as PlaceOrderResponse;
+  pastOrders.push(newOrder);
+  res.send(newOrder);
 });
 
 app.listen(port, () => {
