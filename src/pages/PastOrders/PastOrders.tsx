@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Container, List, ListItem, ListItemText, Typography } from '@mui/material';
-import { useAppSelector } from '../../redux/Hooks';
-import { selectPastOrders } from '../../redux/Slices/CheckoutSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/Hooks';
+import { getPastOrders, selectPastOrders } from '../../redux/Slices/CheckoutSlice';
 import { calculateTotalOrderPrice } from '../../utils/calculateTotalOrderPrice';
 
 // TODO (low): add navigation button to get back to market place
-const OrderHistory = () => {
+const PastOrders = () => {
   const pastOrders = useAppSelector(selectPastOrders);
+  const dispatch = useAppDispatch();
 
-  // TODO (mid): pretty display past orders
+  useEffect(() => {
+    dispatch(getPastOrders());
+  }, [dispatch]);
+
+  // TODO (high): show loading spinner while loading past orders
+  // TODO (high): show error toast if failed to load past orders
+
+  // TODO (low): pretty display past orders
   return (
     <Container maxWidth={'sm'}>
       <Typography>Your past orders</Typography>
@@ -28,4 +36,4 @@ const OrderHistory = () => {
     </Container>
   );
 };
-export default OrderHistory;
+export default PastOrders;

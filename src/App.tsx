@@ -4,7 +4,7 @@ import Header from './components/Header/Header';
 import Marketplace from './pages/Marketplace/Marketplace';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Checkout from './pages/Checkout/Checkout';
-import OrderHistory from './pages/OrderHistory/OrderHistory';
+import PastOrders from './pages/PastOrders/PastOrders';
 
 const App = () => {
   return (
@@ -14,7 +14,7 @@ const App = () => {
         <Routes>
           <Route path="marketplace" element={<Marketplace />} />
           <Route path="checkout" element={<Checkout />} />
-          <Route path="orders" element={<OrderHistory />} />
+          <Route path="orders" element={<PastOrders />} />
           <Route path="*" element={<Navigate replace to="/marketplace" />} />
         </Routes>
       </Box>

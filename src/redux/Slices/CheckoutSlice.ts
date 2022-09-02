@@ -2,25 +2,34 @@ import { OrderItem } from '../../models/OrderItem';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../Store';
 import { PlaceOrderRequest, PlaceOrderResponse } from '../../api/Order/PlaceOrderDto';
-import { placeOrder as placeOrderApi } from '../../api/Order/OrderApi';
+import { fetchPastOrders, placeOrder as placeOrderApi } from '../../api/Order/OrderApi';
+import { RequestStatus } from '../../utils/RequestStatus';
 
 export interface CheckoutState {
   orderItems: OrderItem[];
-  placeOrderStatus: 'idle' | 'loading' | 'successful' | 'failed';
+  placeOrderStatus: RequestStatus;
   placeOrderError?: string;
   pastOrders: PlaceOrderResponse[];
+  fetchPastOrdersStatus: RequestStatus;
+  fetchPastOrdersError?: string;
 }
 
 export const initialCheckoutState: CheckoutState = {
   orderItems: [],
-  placeOrderStatus: 'idle',
+  placeOrderStatus: RequestStatus.IDLE,
   placeOrderError: undefined,
   pastOrders: [],
+  fetchPastOrdersStatus: RequestStatus.IDLE,
+  fetchPastOrdersError: undefined,
 };
 
 // TODO (high): explore RTK Query data fetching API as an alternative to writing thunks for data fetching
 export const placeOrder = createAsyncThunk('checkout/placeOrder', async (placeOrderRequest: PlaceOrderRequest) => {
   return placeOrderApi(placeOrderRequest);
+});
+
+export const getPastOrders = createAsyncThunk('checkout/getPastOrders', async () => {
+  return fetchPastOrders();
 });
 
 export const checkoutSlice = createSlice({
@@ -39,24 +48,40 @@ export const checkoutSlice = createSlice({
       ];
     },
   },
-  // Provides methods that let us define additional case reducers that will run in response to actions defined outside of the slice
+  // Provides methods that let us define additional case reducers that will run in response to actions defined outside the slice
   extraReducers: (builder) => {
     builder
       .addCase(placeOrder.pending, (state) => {
-        state.placeOrderStatus = 'loading';
+        state.placeOrderStatus = RequestStatus.LOADING;
         state.placeOrderError = undefined;
         console.log('Placing order ...');
       })
       .addCase(placeOrder.fulfilled, (state, action) => {
-        state.placeOrderStatus = 'successful';
+        state.placeOrderStatus = RequestStatus.SUCCESSFUL;
         state.pastOrders.push(action.payload);
         state.orderItems = [];
         console.log('Placed order successfully', action.payload);
       })
       .addCase(placeOrder.rejected, (state, action) => {
-        state.placeOrderStatus = 'failed';
+        state.placeOrderStatus = RequestStatus.FAILED;
         state.placeOrderError = action.error.message;
         console.error('Failed to place order: ', action.error.message);
+      })
+
+      .addCase(getPastOrders.pending, (state) => {
+        state.pastOrders = [];
+        state.placeOrderStatus = RequestStatus.LOADING;
+        state.fetchPastOrdersError = undefined;
+        console.log('Fetching past orders');
+      })
+      .addCase(getPastOrders.fulfilled, (state, action) => {
+        state.fetchPastOrdersStatus = RequestStatus.SUCCESSFUL;
+        state.pastOrders.push(...action.payload);
+      })
+      .addCase(getPastOrders.rejected, (state, action) => {
+        state.placeOrderStatus = RequestStatus.FAILED;
+        state.placeOrderError = action.error.message;
+        console.error('Failed to fetch past orders: ', action.error.message);
       });
   },
 });

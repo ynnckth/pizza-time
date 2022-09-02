@@ -1,13 +1,17 @@
 import checkoutReducer, { addOrderItem, initialCheckoutState, removeOrderItem } from './CheckoutSlice';
 import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestPizzas';
+import { RequestStatus } from '../../utils/RequestStatus';
 
+// TODO (high): check how to unit test an async thunk action that uses extra reducers
 describe('Checkout reducer', () => {
   it('should handle initial state', () => {
     expect(checkoutReducer(undefined, { type: 'unknown' })).toEqual({
       orderItems: [],
-      placeOrderStatus: 'idle',
+      placeOrderStatus: RequestStatus.IDLE,
       placeOrderError: undefined,
       pastOrders: [],
+      fetchPastOrdersError: undefined,
+      fetchPastOrdersStatus: RequestStatus.IDLE,
     });
   });
 

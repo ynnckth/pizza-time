@@ -3,11 +3,11 @@ import { Box, Button, Container, IconButton, List, ListItem, ListItemText, Typog
 import { Delete } from '@mui/icons-material';
 import {
   placeOrder,
-  selectPastOrders,
+  removeOrderItem,
   selectOrderItems,
+  selectPastOrders,
   selectPlaceOrderError,
   selectPlaceOrderStatus,
-  removeOrderItem,
 } from '../../redux/Slices/CheckoutSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/Hooks';
 import { TestId } from '../../testUtils/TestId';
@@ -16,6 +16,7 @@ import { Page } from '../../Navigation';
 import { calculateTotalOrderPrice } from '../../utils/calculateTotalOrderPrice';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { toast } from 'react-toastify';
+import { RequestStatus } from '../../utils/RequestStatus';
 
 export const PLACE_ORDER_SUCCESS_MESSAGE = 'Successfully placed order';
 
@@ -34,13 +35,13 @@ const Checkout = () => {
   }, [orderItems]);
 
   useEffect(() => {
-    if (placeOrderError && placeOrderStatus === 'failed') {
+    if (placeOrderError && placeOrderStatus === RequestStatus.FAILED) {
       toast.error(placeOrderError);
     }
   }, [placeOrderError, placeOrderStatus]);
 
   useEffect(() => {
-    if (placeOrderStatus === 'successful' && !placeOrderError) {
+    if (placeOrderStatus === RequestStatus.SUCCESSFUL && !placeOrderError) {
       toast.success(PLACE_ORDER_SUCCESS_MESSAGE);
       navigate(Page.PAST_ORDERS);
     }
@@ -58,7 +59,7 @@ const Checkout = () => {
     return <Typography data-testid={TestId.CHECKOUT_EMPTY_CART_MESSAGE}>Your cart is empty.</Typography>;
   }
 
-  if (placeOrderStatus === 'loading') {
+  if (placeOrderStatus === RequestStatus.LOADING) {
     return <LoadingSpinner loadingText={'Placing your order ...'} />;
   }
 
