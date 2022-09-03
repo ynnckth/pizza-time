@@ -1,21 +1,37 @@
 import React, { useEffect } from 'react';
 import { Box, Container, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../redux/Hooks';
-import { getPastOrders, selectPastOrders } from '../../redux/Slices/CheckoutSlice';
+import {
+  getPastOrders,
+  selectFetchPastOrdersError,
+  selectFetchPastOrdersStatus,
+  selectPastOrders,
+} from '../../redux/Slices/CheckoutSlice';
 import { calculateTotalOrderPrice } from '../../utils/calculateTotalOrderPrice';
 import { TestId } from '../../testUtils/TestId';
+import { toast } from 'react-toastify';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import { RequestStatus } from '../../utils/RequestStatus';
 
 // TODO (low): add navigation button to get back to market place
 const PastOrders = () => {
   const pastOrders = useAppSelector(selectPastOrders);
+  const fetchPastOrdersStatus = useAppSelector(selectFetchPastOrdersStatus);
+  const fetchPastOrdersError = useAppSelector(selectFetchPastOrdersError);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getPastOrders());
   }, [dispatch]);
 
-  // TODO (high): show loading spinner while loading past orders
-  // TODO (high): show error toast if failed to load past orders
+  useEffect(() => {
+    if (fetchPastOrdersError) toast.error(fetchPastOrdersError);
+  }, [fetchPastOrdersError]);
+
+  if (fetchPastOrdersStatus === RequestStatus.LOADING) {
+    return <LoadingSpinner loadingText={'Retrieving past orders ...'} />;
+  }
 
   // TODO (low): pretty display past orders
   return (

@@ -70,7 +70,7 @@ export const checkoutSlice = createSlice({
 
       .addCase(getPastOrders.pending, (state) => {
         state.pastOrders = [];
-        state.placeOrderStatus = RequestStatus.LOADING;
+        state.fetchPastOrdersStatus = RequestStatus.LOADING;
         state.fetchPastOrdersError = undefined;
         console.log('Fetching past orders');
       })
@@ -79,8 +79,8 @@ export const checkoutSlice = createSlice({
         state.pastOrders.push(...action.payload);
       })
       .addCase(getPastOrders.rejected, (state, action) => {
-        state.placeOrderStatus = RequestStatus.FAILED;
-        state.placeOrderError = action.error.message;
+        state.fetchPastOrdersStatus = RequestStatus.FAILED;
+        state.fetchPastOrdersError = action.error.message;
         console.error('Failed to fetch past orders: ', action.error.message);
       });
   },
@@ -92,5 +92,7 @@ export const selectOrderItems = (state: RootState) => state.checkout.orderItems;
 export const selectPastOrders = (state: RootState) => state.checkout.pastOrders;
 export const selectPlaceOrderStatus = (state: RootState) => state.checkout.placeOrderStatus;
 export const selectPlaceOrderError = (state: RootState) => state.checkout.placeOrderError;
+export const selectFetchPastOrdersStatus = (state: RootState) => state.checkout.fetchPastOrdersStatus;
+export const selectFetchPastOrdersError = (state: RootState) => state.checkout.fetchPastOrdersError;
 
 export default checkoutSlice.reducer;

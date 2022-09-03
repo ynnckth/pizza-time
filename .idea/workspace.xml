@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a3096ea-6e57-4819-9c1d-d93f884f785a" name="Changes" comment="">
+    <list default="true" id="5a3096ea-6e57-4819-9c1d-d93f884f785a" name="Changes" comment="Show loading spinner and error message when fetching past orders">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/Order/OrderApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/Order/OrderApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Checkout/Checkout.spec.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Checkout/Checkout.spec.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.spec.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.spec.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/testUtils/TestId.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/testUtils/TestId.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/redux/Slices/CheckoutSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Slices/CheckoutSlice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +79,34 @@
       </test-names>
       <method v="2" />
     </configuration>
+    <configuration name="PastOrders.should show error toast if failed to fetch past orders" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/frontend/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$/frontend" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.spec.tsx" />
+      <test-names>
+        <test-name value="PastOrders" />
+        <test-name value="should show error toast if failed to fetch past orders" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="PastOrders.should show message if no past orders present" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/frontend/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$/frontend" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.spec.tsx" />
+      <test-names>
+        <test-name value="PastOrders" />
+        <test-name value="should show message if no past orders present" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="PastOrders.should show past orders" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -100,6 +124,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Jest.PastOrders" />
+        <item itemvalue="Jest.PastOrders.should show error toast if failed to fetch past orders" />
+        <item itemvalue="Jest.PastOrders.should show message if no past orders present" />
         <item itemvalue="Jest.PastOrders.should show past orders" />
         <item itemvalue="Jest.Checkout.should redirect to past orders page and show success toast after successfully placed order" />
       </list>
@@ -113,7 +139,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1662083751373</updated>
-      <workItem from="1662083755358" duration="17357000" />
+      <workItem from="1662083755358" duration="19042000" />
     </task>
     <task id="LOCAL-00001" summary="Fetch past orders in orders page using an async thunk">
       <created>1662086904711</created>
@@ -143,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662099425687</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Use msw library to mock network requests for frontend tests and enable integration testing of components using a real redux store">
+      <created>1662179709094</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1662179709094</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,7 +198,9 @@
     <MESSAGE value="Move frontend code into a dedicated frontend directory as a backend will follow for a minimal dummy backend" />
     <MESSAGE value="Introduce simple node express backend server that returns mock responses" />
     <MESSAGE value="Send requests to backend instead of mocking on API layer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Send requests to backend instead of mocking on API layer" />
+    <MESSAGE value="Use msw library to mock network requests for frontend tests and enable integration testing of components using a real redux store" />
+    <MESSAGE value="Show loading spinner and error message when fetching past orders" />
+    <option name="LAST_COMMIT_MESSAGE" value="Show loading spinner and error message when fetching past orders" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

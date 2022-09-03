@@ -30,6 +30,8 @@ describe('PastOrders', () => {
   it('should show past orders', async () => {
     renderWithProviders(<PastOrders />);
 
+    await waitFor(() => expect(screen.getByTestId(TestId.LOADING_SPINNER)).toBeVisible());
+    await waitFor(() => expect(screen.queryByTestId(TestId.LOADING_SPINNER)).toBeFalsy());
     await waitFor(() =>
       expect(screen.queryAllByTestId(TestId.PAST_ORDERS_ORDER)).toHaveLength(samplePastOrders.length)
     );
@@ -44,6 +46,25 @@ describe('PastOrders', () => {
 
     renderWithProviders(<PastOrders />);
 
+    await waitFor(() => expect(screen.getByTestId(TestId.LOADING_SPINNER)).toBeVisible());
+    await waitFor(() => expect(screen.queryByTestId(TestId.LOADING_SPINNER)).toBeFalsy());
+    await waitFor(() => expect(screen.getByTestId(TestId.PAST_ORDERS_NO_ORDERS_MESSAGE)).toBeVisible());
+    await waitFor(() => expect(screen.queryAllByTestId(TestId.PAST_ORDERS_ORDER)).toHaveLength(0));
+  });
+
+  it('should show error toast if failed to fetch past orders', async () => {
+    const errorMessage = 'Network request failed';
+    server.use(
+      rest.get(ordersBaseUrl, async (req, res) => {
+        return res.networkError(errorMessage);
+      })
+    );
+
+    renderWithProviders(<PastOrders />);
+
+    await waitFor(() => expect(screen.getByTestId(TestId.LOADING_SPINNER)).toBeVisible());
+    await waitFor(() => expect(screen.queryByTestId(TestId.LOADING_SPINNER)).toBeFalsy());
+    await waitFor(() => expect(screen.getByText(errorMessage)).toBeVisible());
     await waitFor(() => expect(screen.getByTestId(TestId.PAST_ORDERS_NO_ORDERS_MESSAGE)).toBeVisible());
     await waitFor(() => expect(screen.queryAllByTestId(TestId.PAST_ORDERS_ORDER)).toHaveLength(0));
   });
