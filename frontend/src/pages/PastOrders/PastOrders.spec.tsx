@@ -1,10 +1,50 @@
 import { renderWithProviders } from '../../testUtils/renderWithProviders';
+import { screen, waitFor } from '@testing-library/react';
 import PastOrders from './PastOrders';
+import { rest } from 'msw';
+import { ordersBaseUrl } from '../../api/Order/OrderApi';
+import { PlaceOrderResponse } from '../../api/Order/PlaceOrderDto';
+import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestPizzas';
+import { TestId } from '../../testUtils/TestId';
+import { setupServer } from 'msw/node';
 
-// TODO (high): Need to use real fetch calls in API's and instead  use something like MSW to intercept network requests
-//  see https://redux.js.org/usage/writing-tests#writing-integration-tests-with-components
+const samplePastOrders: PlaceOrderResponse[] = [
+  { orderId: '0001', orderItems: [pizzaMargherita, pizzaSalami] },
+  { orderId: '0002', orderItems: [pizzaMargherita] },
+];
+
+// msw is used to intercept network requests
+export const handlers = [
+  rest.get(ordersBaseUrl, async (req, res, ctx) => {
+    return res(ctx.json(samplePastOrders), ctx.delay(150));
+  }),
+];
+
+const server = setupServer(...handlers);
+
 describe('PastOrders', () => {
-  it('should ', () => {
+  beforeAll(() => server.listen());
+  afterEach(() => server.resetHandlers());
+  afterAll(() => server.close());
+
+  it('should show past orders', async () => {
     renderWithProviders(<PastOrders />);
+
+    await waitFor(() =>
+      expect(screen.queryAllByTestId(TestId.PAST_ORDERS_ORDER)).toHaveLength(samplePastOrders.length)
+    );
+  });
+
+  it('should show message if no past orders present', async () => {
+    server.use(
+      rest.get(ordersBaseUrl, async (req, res, ctx) => {
+        return res(ctx.json([]), ctx.delay(150));
+      })
+    );
+
+    renderWithProviders(<PastOrders />);
+
+    await waitFor(() => expect(screen.getByTestId(TestId.PAST_ORDERS_NO_ORDERS_MESSAGE)).toBeVisible());
+    await waitFor(() => expect(screen.queryAllByTestId(TestId.PAST_ORDERS_ORDER)).toHaveLength(0));
   });
 });

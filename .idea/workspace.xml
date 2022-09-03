@@ -2,19 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5a3096ea-6e57-4819-9c1d-d93f884f785a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/TestPizzas.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/models/OrderItem.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/models/Pizza.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/models/PlaceOrderDto.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/api/Order/OrderApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/Order/OrderApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/Pizza/PizzaApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/Pizza/PizzaApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Checkout/Checkout.spec.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Checkout/Checkout.spec.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.spec.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.spec.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/testUtils/TestId.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/testUtils/TestId.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +38,9 @@
     "last_opened_file_path": "/Users/yast/workspace/training/pizza-time/backend/src",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs.jest.jest_package": "/Users/yast/workspace/training/pizza-time/frontend/node_modules/react-scripts",
     "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/Users/yast/workspace/training/pizza-time/node_modules/prettier",
+    "prettierjs.PrettierConfiguration.Package": "/Users/yast/workspace/training/pizza-time/frontend/node_modules/prettier",
     "settings.editor.selected.configurable": "settings.javascript.prettier",
     "ts.external.directory.path": "/Users/yast/workspace/training/pizza-time/frontend/node_modules/typescript/lib"
   }
@@ -59,6 +55,56 @@
       <recent name="$PROJECT_DIR$/frontend" />
     </key>
   </component>
+  <component name="RunManager" selected="Jest.PastOrders">
+    <configuration name="Checkout.should redirect to past orders page and show success toast after successfully placed order" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/frontend/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$/frontend" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/frontend/src/pages/Checkout/Checkout.spec.tsx" />
+      <test-names>
+        <test-name value="Checkout" />
+        <test-name value="should redirect to past orders page and show success toast after successfully placed order" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="PastOrders" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/frontend/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$/frontend" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.spec.tsx" />
+      <test-names>
+        <test-name value="PastOrders" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="PastOrders.should show past orders" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/frontend/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$/frontend" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.spec.tsx" />
+      <test-names>
+        <test-name value="PastOrders" />
+        <test-name value="should show past orders" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.PastOrders" />
+        <item itemvalue="Jest.PastOrders.should show past orders" />
+        <item itemvalue="Jest.Checkout.should redirect to past orders page and show success toast after successfully placed order" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -67,7 +113,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1662083751373</updated>
-      <workItem from="1662083755358" duration="8682000" />
+      <workItem from="1662083755358" duration="17357000" />
     </task>
     <task id="LOCAL-00001" summary="Fetch past orders in orders page using an async thunk">
       <created>1662086904711</created>
@@ -90,17 +136,36 @@
       <option name="project" value="LOCAL" />
       <updated>1662096983911</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Send requests to backend instead of mocking on API layer">
+      <created>1662099425687</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1662099425687</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fetch past orders in orders page using an async thunk" />
     <MESSAGE value="Move frontend code into a dedicated frontend directory as a backend will follow for a minimal dummy backend" />
     <MESSAGE value="Introduce simple node express backend server that returns mock responses" />
-    <option name="LAST_COMMIT_MESSAGE" value="Introduce simple node express backend server that returns mock responses" />
+    <MESSAGE value="Send requests to backend instead of mocking on API layer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Send requests to backend instead of mocking on API layer" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

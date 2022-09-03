@@ -5,6 +5,9 @@ import { TestId } from '../../testUtils/TestId';
 import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestPizzas';
 import { initialCheckoutState } from '../../redux/Slices/CheckoutSlice';
 import { Page } from '../../Navigation';
+import { rest } from 'msw';
+import { ordersBaseUrl } from '../../api/Order/OrderApi';
+import { setupServer } from 'msw/node';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -12,10 +15,25 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
+// msw is used to intercept network requests
+export const handlers = [
+  rest.post(ordersBaseUrl, async (req, res, ctx) => {
+    const request = await req.json();
+    const placeOrderResponse = {
+      orderId: 'a367772a-eda3-4057-95f9-a26a83b15f62',
+      orderItems: request.orderItems,
+    };
+    return res(ctx.json(placeOrderResponse), ctx.delay(150));
+  }),
+];
+
+const server = setupServer(...handlers);
+
 describe('Checkout', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
+  beforeAll(() => server.listen());
+  beforeEach(() => jest.clearAllMocks());
+  afterEach(() => server.resetHandlers());
+  afterAll(() => server.close());
 
   it('should show empty cart message if no order items present', () => {
     renderWithProviders(<Checkout />);
@@ -66,14 +84,12 @@ describe('Checkout', () => {
   });
 
   it('should redirect to past orders page and show success toast after successfully placed order', async () => {
-    jest.useFakeTimers();
     renderWithProviders(<Checkout />, {
       preloadedState: { checkout: { ...initialCheckoutState, orderItems: [pizzaMargherita, pizzaSalami] } },
     });
     fireEvent.click(screen.getByTestId(TestId.CHECKOUT_PLACE_ORDER_BUTTON));
 
     await waitFor(() => expect(screen.getByTestId(TestId.LOADING_SPINNER)).toBeVisible());
-    jest.runOnlyPendingTimers();
     await waitFor(() => expect(screen.queryByTestId(TestId.LOADING_SPINNER)).toBeFalsy());
     await waitFor(() => expect(screen.getByText(PLACE_ORDER_SUCCESS_MESSAGE)).toBeVisible());
     await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith(Page.PAST_ORDERS));
