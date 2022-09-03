@@ -54,25 +54,21 @@ export const checkoutSlice = createSlice({
       .addCase(placeOrder.pending, (state) => {
         state.placeOrderStatus = RequestStatus.LOADING;
         state.placeOrderError = undefined;
-        console.log('Placing order ...');
       })
       .addCase(placeOrder.fulfilled, (state, action) => {
         state.placeOrderStatus = RequestStatus.SUCCESSFUL;
         state.pastOrders.push(action.payload);
         state.orderItems = [];
-        console.log('Placed order successfully', action.payload);
       })
       .addCase(placeOrder.rejected, (state, action) => {
         state.placeOrderStatus = RequestStatus.FAILED;
         state.placeOrderError = action.error.message;
-        console.error('Failed to place order: ', action.error.message);
       })
 
       .addCase(getPastOrders.pending, (state) => {
         state.pastOrders = [];
         state.fetchPastOrdersStatus = RequestStatus.LOADING;
         state.fetchPastOrdersError = undefined;
-        console.log('Fetching past orders');
       })
       .addCase(getPastOrders.fulfilled, (state, action) => {
         state.fetchPastOrdersStatus = RequestStatus.SUCCESSFUL;
@@ -81,7 +77,6 @@ export const checkoutSlice = createSlice({
       .addCase(getPastOrders.rejected, (state, action) => {
         state.fetchPastOrdersStatus = RequestStatus.FAILED;
         state.fetchPastOrdersError = action.error.message;
-        console.error('Failed to fetch past orders: ', action.error.message);
       });
   },
 });

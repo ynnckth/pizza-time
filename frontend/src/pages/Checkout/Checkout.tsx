@@ -101,7 +101,7 @@ const Checkout = () => {
 
       <Typography data-testid={TestId.CHECKOUT_TOTAL_PRICE}>{`Total: $${getTotalPrice()}`}</Typography>
 
-      {/* TODO (high): add a form with user details using formik */}
+      {/* TODO (high): add a form with user details using formik (https://formik.org/docs/overview) */}
 
       <Button
         variant="contained"

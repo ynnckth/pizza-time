@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a3096ea-6e57-4819-9c1d-d93f884f785a" name="Changes" comment="Show loading spinner and error message when fetching past orders">
+    <list default="true" id="5a3096ea-6e57-4819-9c1d-d93f884f785a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.spec.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.spec.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/PastOrders/PastOrders.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Checkout/Checkout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Checkout/Checkout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/redux/Slices/CheckoutSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Slices/CheckoutSlice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -139,7 +138,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1662083751373</updated>
-      <workItem from="1662083755358" duration="19042000" />
+      <workItem from="1662083755358" duration="21287000" />
     </task>
     <task id="LOCAL-00001" summary="Fetch past orders in orders page using an async thunk">
       <created>1662086904711</created>
@@ -176,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662179709094</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Show loading spinner and error message when fetching past orders">
+      <created>1662181497639</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1662181497639</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
