@@ -54,8 +54,13 @@ const Checkout = () => {
       toast.warning('Cannot place order since your cart is empty!');
       return;
     }
-    // TODO: include checkout form values in new order request
-    dispatch(placeOrder({ orderItems: orderItems }));
+    dispatch(
+      placeOrder({
+        orderItems: orderItems,
+        customer: { ...checkoutFormValues },
+        orderDate: new Date().toISOString(),
+      })
+    );
   };
 
   if (orderItems.length < 1) {
