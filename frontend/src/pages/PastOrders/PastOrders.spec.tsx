@@ -9,8 +9,26 @@ import { TestId } from '../../testUtils/TestId';
 import { setupServer } from 'msw/node';
 
 const samplePastOrders: PlaceOrderResponse[] = [
-  { orderId: '0001', orderItems: [pizzaMargherita, pizzaSalami] },
-  { orderId: '0002', orderItems: [pizzaMargherita] },
+  {
+    orderId: '0001',
+    orderItems: [pizzaMargherita, pizzaSalami],
+    customer: {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@test.com',
+    },
+    orderDate: '2022-09-04T07:58:49.098Z',
+  },
+  {
+    orderId: '0002',
+    orderItems: [pizzaMargherita],
+    customer: {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@test.com',
+    },
+    orderDate: '2022-09-04T07:58:49.098Z',
+  },
 ];
 
 // msw is used to intercept network requests

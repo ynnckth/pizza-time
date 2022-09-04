@@ -6,7 +6,7 @@ import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { ShoppingCart } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../redux/Hooks';
-import { selectOrderItems } from '../../redux/Slices/CheckoutSlice';
+import { selectOrderItems } from '../../redux/Slices/Checkout/CheckoutSlice';
 import { TestId } from '../../testUtils/TestId';
 import { Page } from '../../Navigation';
 import { toast } from 'react-toastify';

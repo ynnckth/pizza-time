@@ -6,7 +6,7 @@ import {
   selectFetchPastOrdersError,
   selectFetchPastOrdersStatus,
   selectPastOrders,
-} from '../../redux/Slices/CheckoutSlice';
+} from '../../redux/Slices/Checkout/CheckoutSlice';
 import { calculateTotalOrderPrice } from '../../utils/calculateTotalOrderPrice';
 import { TestId } from '../../testUtils/TestId';
 import { toast } from 'react-toastify';

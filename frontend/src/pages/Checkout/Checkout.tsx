@@ -8,7 +8,7 @@ import {
   selectPastOrders,
   selectPlaceOrderError,
   selectPlaceOrderStatus,
-} from '../../redux/Slices/CheckoutSlice';
+} from '../../redux/Slices/Checkout/CheckoutSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/Hooks';
 import { TestId } from '../../testUtils/TestId';
 import { useNavigate } from 'react-router-dom';

@@ -1,8 +1,10 @@
 import { Action, combineReducers, configureStore, PreloadedState, ThunkAction } from '@reduxjs/toolkit';
-import { checkoutSlice } from './Slices/CheckoutSlice';
+import { checkoutSlice } from './Slices/Checkout/CheckoutSlice';
+import { themeSlice } from './Slices/Theme/ThemeSlice';
 
 const rootReducer = combineReducers({
   checkout: checkoutSlice.reducer,
+  theme: themeSlice.reducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {

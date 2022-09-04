@@ -4,7 +4,7 @@ import { Pizza } from '../../models/Pizza';
 import pizzaImage from '../../assets/pizza.png';
 import { TestId } from '../../testUtils/TestId';
 import { useAppDispatch } from '../../redux/Hooks';
-import { addOrderItem } from '../../redux/Slices/CheckoutSlice';
+import { addOrderItem } from '../../redux/Slices/Checkout/CheckoutSlice';
 
 interface Props {
   pizza: Pizza;
