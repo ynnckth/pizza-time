@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { Box, Button, Container, IconButton, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Box, Container, Divider, IconButton, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import {
   placeOrder,
@@ -17,6 +17,8 @@ import { calculateTotalOrderPrice } from '../../utils/calculateTotalOrderPrice';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { toast } from 'react-toastify';
 import { RequestStatus } from '../../utils/RequestStatus';
+import CheckoutForm from '../../components/CheckoutForm/CheckoutForm';
+import { CheckoutFormValues } from '../../models/CheckoutFormValues';
 
 export const PLACE_ORDER_SUCCESS_MESSAGE = 'Successfully placed order';
 
@@ -47,11 +49,12 @@ const Checkout = () => {
     }
   }, [orderHistory, placeOrderStatus, navigate, placeOrderError]);
 
-  const validateAndPlaceOrder = () => {
+  const validateAndPlaceOrder = (checkoutFormValues: CheckoutFormValues) => {
     if (orderItems.length < 1) {
-      alert('Cannot place order since your cart is empty!');
+      toast.warning('Cannot place order since your cart is empty!');
       return;
     }
+    // TODO: include checkout form values in new order request
     dispatch(placeOrder({ orderItems: orderItems }));
   };
 
@@ -65,7 +68,7 @@ const Checkout = () => {
 
   return (
     <Container maxWidth={'sm'}>
-      <Typography>Please review your order</Typography>
+      <Typography variant={'h5'}>Please review your order</Typography>
       <Box sx={{ maxWidth: 500 }}>
         <List>
           {orderItems
@@ -101,15 +104,11 @@ const Checkout = () => {
 
       <Typography data-testid={TestId.CHECKOUT_TOTAL_PRICE}>{`Total: $${getTotalPrice()}`}</Typography>
 
-      {/* TODO (high): add a form with user details using formik (https://formik.org/docs/overview) */}
+      <Divider sx={{ marginTop: 5 }} />
 
-      <Button
-        variant="contained"
-        onClick={() => validateAndPlaceOrder()}
-        data-testid={TestId.CHECKOUT_PLACE_ORDER_BUTTON}
-      >
-        Place order
-      </Button>
+      <Box sx={{ marginTop: 5 }}>
+        <CheckoutForm onSubmit={(checkoutFormValues) => validateAndPlaceOrder(checkoutFormValues)} />
+      </Box>
     </Container>
   );
 };

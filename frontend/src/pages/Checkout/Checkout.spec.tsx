@@ -87,6 +87,10 @@ describe('Checkout', () => {
     renderWithProviders(<Checkout />, {
       preloadedState: { checkout: { ...initialCheckoutState, orderItems: [pizzaMargherita, pizzaSalami] } },
     });
+    fireEvent.change(screen.getByTestId(TestId.CHECKOUT_FORM_LAST_NAME), { target: { value: 'Doe' } });
+    fireEvent.change(screen.getByTestId(TestId.CHECKOUT_FORM_FIRST_NAME), { target: { value: 'John' } });
+    fireEvent.change(screen.getByTestId(TestId.CHECKOUT_FORM_EMAIL), { target: { value: 'john.doe@test.com' } });
+
     fireEvent.click(screen.getByTestId(TestId.CHECKOUT_PLACE_ORDER_BUTTON));
 
     await waitFor(() => expect(screen.getByTestId(TestId.LOADING_SPINNER)).toBeVisible());
