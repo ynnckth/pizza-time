@@ -23,11 +23,12 @@ export const initialCheckoutState: CheckoutState = {
   fetchPastOrdersError: undefined,
 };
 
-// TODO (high): explore RTK Query data fetching API as an alternative to writing thunks for data fetching
+// TODO: check how this thunk could be replaced with a RTK Query mutation
 export const placeOrder = createAsyncThunk('checkout/placeOrder', async (placeOrderRequest: PlaceOrderRequest) => {
   return placeOrderApi(placeOrderRequest);
 });
 
+// TODO: check if it would simplify things to use RTK Query instead of this thunk
 export const getPastOrders = createAsyncThunk('checkout/getPastOrders', async () => {
   return fetchPastOrders();
 });
