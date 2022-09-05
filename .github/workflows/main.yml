@@ -9,19 +9,20 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  test-frontend:
     runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@v3
       
-      - name: test frontend
+      - name: unit and integration tests
         run: |
           cd frontend
           npm install
           npm test
 
-      - name: e2e
+      - name: e2e tests
+        # TODO: Instead of running frontend in dev mode, build and serve statically (currently lots of unnecessary overhead with transpiling, etc.)
         run: |
           cd frontend
           npm run start:ci
