@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Box, Fab, Typography } from '@mui/material';
 import PizzaCard from '../../components/PizzaCard/PizzaCard';
-import usePizzas from '../../hooks/usePizzas';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { ShoppingCart } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
@@ -10,15 +9,16 @@ import { selectOrderItems } from '../../redux/Slices/Checkout/CheckoutSlice';
 import { TestId } from '../../testUtils/TestId';
 import { Page } from '../../Navigation';
 import { toast } from 'react-toastify';
+import { useFetchAllPizzasQuery } from '../../redux/Slices/Marketplace/MarketplaceSlice';
 
 const Marketplace = () => {
   const navigate = useNavigate();
-  const { pizzas, loadingPizzas, errorLoadingPizzas } = usePizzas();
+  const { data: pizzas, error: errorLoadingPizzas, isLoading: loadingPizzas } = useFetchAllPizzasQuery();
   const orderItems = useAppSelector(selectOrderItems);
 
   useEffect(() => {
     if (errorLoadingPizzas) {
-      toast.error(errorLoadingPizzas);
+      toast.error(JSON.stringify(errorLoadingPizzas));
     }
   }, [errorLoadingPizzas]);
 
@@ -36,7 +36,7 @@ const Marketplace = () => {
         flexWrap: 'wrap',
       }}
     >
-      {pizzas.map((pizza, key) => (
+      {(pizzas || []).map((pizza, key) => (
         <PizzaCard pizza={pizza} key={key} />
       ))}
       <Fab

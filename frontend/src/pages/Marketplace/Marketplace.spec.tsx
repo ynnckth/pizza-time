@@ -1,17 +1,33 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import Marketplace from './Marketplace';
-import * as usePizzas from '../../hooks/usePizzas';
 import { TestId } from '../../testUtils/TestId';
 import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestPizzas';
 import { renderWithProviders } from '../../testUtils/renderWithProviders';
+import { pizzasBaseUrl } from '../../api/Pizza/PizzaApi';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 
-jest.mock('../../hooks/usePizzas');
+const testPizzas = [pizzaMargherita, pizzaSalami];
+
+export const handlers = [
+  rest.get(pizzasBaseUrl, async (req, res, ctx) => {
+    return res(ctx.json(testPizzas), ctx.delay(150));
+  }),
+];
+
+const server = setupServer(...handlers);
 
 describe('Marketplace', () => {
+  beforeAll(() => server.listen());
+  afterEach(() => server.resetHandlers());
+  afterAll(() => server.close());
+
   it('should show loading spinner while retrieving pizzas', () => {
-    jest
-      .spyOn(usePizzas, 'default')
-      .mockImplementation(() => ({ pizzas: [], loadingPizzas: true, errorLoadingPizzas: undefined }));
+    server.use(
+      rest.get(pizzasBaseUrl, async (req, res, ctx) => {
+        return res(ctx.json([]), ctx.delay('infinite'));
+      })
+    );
 
     renderWithProviders(<Marketplace />);
 
@@ -19,30 +35,26 @@ describe('Marketplace', () => {
     expect(screen.queryByTestId(TestId.MARKETPLACE_PIZZA_CARD)).toBeFalsy();
   });
 
-  it('should list available pizzas', () => {
-    jest.spyOn(usePizzas, 'default').mockImplementation(() => ({
-      pizzas: [pizzaMargherita, pizzaSalami],
-      loadingPizzas: false,
-      errorLoadingPizzas: undefined,
-    }));
-
+  it('should list available pizzas', async () => {
     renderWithProviders(<Marketplace />);
 
-    expect(screen.queryAllByTestId(TestId.MARKETPLACE_PIZZA_CARD)).toHaveLength(2);
+    await waitFor(() => expect(screen.queryAllByTestId(TestId.MARKETPLACE_PIZZA_CARD)).toHaveLength(testPizzas.length));
     expect(screen.queryByText(pizzaMargherita.name)).toBeVisible();
     expect(screen.queryByText(pizzaSalami.name)).toBeVisible();
     expect(screen.getByTestId(TestId.MARKETPLACE_NO_OF_ORDER_ITEMS)).toHaveTextContent('0');
     expect(screen.queryByTestId(TestId.LOADING_SPINNER)).toBeFalsy();
   });
 
-  it('should update displayed items in cart', () => {
-    jest.spyOn(usePizzas, 'default').mockImplementation(() => ({
-      pizzas: [pizzaMargherita],
-      loadingPizzas: false,
-      errorLoadingPizzas: undefined,
-    }));
+  it('should update displayed items in cart', async () => {
+    server.use(
+      rest.get(pizzasBaseUrl, async (req, res, ctx) => {
+        return res(ctx.json([pizzaMargherita]), ctx.delay(150));
+      })
+    );
+
     renderWithProviders(<Marketplace />);
 
+    await waitFor(() => expect(screen.queryByTestId(TestId.LOADING_SPINNER)).toBeFalsy());
     fireEvent.click(screen.getByTestId(TestId.MARKETPLACE_ADD_PIZZA_TO_CART));
     fireEvent.click(screen.getByTestId(TestId.MARKETPLACE_ADD_PIZZA_TO_CART));
     fireEvent.click(screen.getByTestId(TestId.MARKETPLACE_ADD_PIZZA_TO_CART));
@@ -52,13 +64,15 @@ describe('Marketplace', () => {
 
   it('should show error toast if failed to fetch pizzas', async () => {
     const errorMessage = 'Failed to fetch pizzas';
-    jest.spyOn(usePizzas, 'default').mockImplementation(() => ({
-      pizzas: [],
-      loadingPizzas: false,
-      errorLoadingPizzas: errorMessage,
-    }));
+    server.use(
+      rest.get(pizzasBaseUrl, async (req, res, ctx) => {
+        return res(ctx.status(500), ctx.json({ message: errorMessage }));
+      })
+    );
+
     renderWithProviders(<Marketplace />);
 
-    await waitFor(() => expect(screen.getByText(errorMessage)).toBeVisible());
+    const displayedError = { status: 500, data: { message: errorMessage } };
+    await waitFor(() => expect(screen.getByText(JSON.stringify(displayedError))).toBeVisible());
   });
 });

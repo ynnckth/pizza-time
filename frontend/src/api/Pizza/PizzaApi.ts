@@ -1,9 +1,11 @@
 import { Pizza } from '../../models/Pizza';
 
-const baseUrl = '/api/pizzas';
+export const pizzasBaseUrl = '/api/pizzas';
 
-// TODO (mid): error handling
+/**
+ * @deprecated Prefer using RTK Query to fetch pizzas instead of this custom hook (see MarketplaceSlice.ts)
+ */
 export const fetchAllPizzas = async (): Promise<Pizza[]> => {
-  const response = await fetch(baseUrl);
+  const response = await fetch(pizzasBaseUrl);
   return response.json();
 };

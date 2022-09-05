@@ -1,16 +1,19 @@
 import { Action, combineReducers, configureStore, PreloadedState, ThunkAction } from '@reduxjs/toolkit';
 import { checkoutSlice } from './Slices/Checkout/CheckoutSlice';
 import { themeSlice } from './Slices/Theme/ThemeSlice';
+import { marketplaceApi } from './Slices/Marketplace/MarketplaceSlice';
 
 const rootReducer = combineReducers({
   checkout: checkoutSlice.reducer,
   theme: themeSlice.reducer,
+  [marketplaceApi.reducerPath]: marketplaceApi.reducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(marketplaceApi.middleware),
   });
 };
 

@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { Pizza } from '../models/Pizza';
 import { fetchAllPizzas } from '../api/Pizza/PizzaApi';
 
-// This hook could be replaced / improved by something like SWR: https://swr.vercel.app
+/**
+ * @deprecated Prefer using RTK Query to fetch pizzas instead of this custom hook (see MarketplaceSlice.ts)
+ */
 const usePizzas = () => {
   const [pizzas, setPizzas] = useState<Pizza[]>([]);
   const [loadingPizzas, setLoadingPizzas] = useState<boolean>(false);
