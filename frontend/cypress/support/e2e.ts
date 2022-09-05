@@ -14,6 +14,14 @@ declare global {
   namespace Cypress {
     interface Chainable {
       getByTestId(testId: string, options?: Partial<TypeOptions>): Chainable<Element>;
+      shouldShowInitialMarketplace(): Chainable<Element>;
+      addItemsToCart(): Chainable<Element>;
+      goToCheckout(expectedNoOfOrderItems: number): Chainable<Element>;
+      removeFirstItemFromCart(expectedNoOfOrderItemsAfterRemoving: number): Chainable<Element>;
+      shouldNotShowAnyFormValidationErrors(): Chainable<Element>;
+      shouldShowFormValidationErrors(): Chainable<Element>;
+      enterFormValues(firstName: string, lastName: string, email: string): Chainable<Element>;
+      placeOrder(): Chainable<Element>;
     }
   }
 }
