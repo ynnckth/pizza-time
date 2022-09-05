@@ -23,7 +23,7 @@ jobs:
       - name: unit and integration tests
         run: |
           cd frontend
-          npm test
+          CI=true npm test
 
       - name: e2e tests
         run: |
