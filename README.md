@@ -20,6 +20,18 @@ npm test
 npm run cypress:open
 ```
 
+## Topics covered in this project
+
+- CRA using TypeScript template
+- Routing using react-router-dom and BrowserRouter
+- State management using Redux Toolkit
+- Redux middleware using Thunk (default from Redux Toolkit)
+- Fetching data using RTK Query
+- React error boundary
+- Form validation using Formik
+- Unit and integration testing including a real store using react-testing-library and msw for mocking network requests
+- E2e testing using cypress (stubbed network calls)
+
 ## Links and relevant documentation:
 - [Redux Toolkit TypeScript quick start](https://redux-toolkit.js.org/tutorials/typescript)
 - [Official CRA template project using redux toolkit and typescript](https://github.com/reduxjs/cra-template-redux-typescript)
