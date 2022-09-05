@@ -1,0 +1,23 @@
+{
+  "orderItems": [
+    {
+      "name": "Salami",
+      "description": "Nice and spicy!",
+      "unitPrice": 12,
+      "isAvailable": true
+    },
+    {
+      "name": "Salami",
+      "description": "Nice and spicy!",
+      "unitPrice": 12,
+      "isAvailable": true
+    }
+  ],
+  "customer": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@gmail.com"
+  },
+  "orderDate": "2022-09-05T02:43:27.692Z",
+  "orderId": "09a7f3fc-9b74-4a4c-a54f-ce4306d48c41"
+}
