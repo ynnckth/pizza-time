@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import Marketplace from './Marketplace';
 import * as usePizzas from '../../hooks/usePizzas';
 import { TestId } from '../../testUtils/TestId';
@@ -48,5 +48,17 @@ describe('Marketplace', () => {
     fireEvent.click(screen.getByTestId(TestId.MARKETPLACE_ADD_PIZZA_TO_CART));
 
     expect(screen.getByTestId(TestId.MARKETPLACE_NO_OF_ORDER_ITEMS)).toHaveTextContent('3');
+  });
+
+  it('should show error toast if failed to fetch pizzas', async () => {
+    const errorMessage = 'Failed to fetch pizzas';
+    jest.spyOn(usePizzas, 'default').mockImplementation(() => ({
+      pizzas: [],
+      loadingPizzas: false,
+      errorLoadingPizzas: errorMessage,
+    }));
+    renderWithProviders(<Marketplace />);
+
+    await waitFor(() => expect(screen.getByText(errorMessage)).toBeVisible());
   });
 });

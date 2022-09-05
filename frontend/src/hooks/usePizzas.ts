@@ -13,7 +13,7 @@ const usePizzas = () => {
     setLoadingPizzas(true);
     fetchAllPizzas()
       .then((allPizzas) => setPizzas(allPizzas))
-      .catch((e) => setErrorLoadingPizzas(e))
+      .catch((e) => setErrorLoadingPizzas(e.message))
       .finally(() => setLoadingPizzas(false));
   }, [setLoadingPizzas, setPizzas, setErrorLoadingPizzas]);
 

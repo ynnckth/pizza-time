@@ -17,7 +17,9 @@ const Marketplace = () => {
   const orderItems = useAppSelector(selectOrderItems);
 
   useEffect(() => {
-    if (errorLoadingPizzas) toast.error(errorLoadingPizzas);
+    if (errorLoadingPizzas) {
+      toast.error(errorLoadingPizzas);
+    }
   }, [errorLoadingPizzas]);
 
   if (loadingPizzas) {

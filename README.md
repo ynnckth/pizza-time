@@ -1,6 +1,6 @@
 # Pizza Time!
 
-*Exploring state-of-the-art state management practices with Redux in ReactJS*
+*Exploring state-of-the-art state management and testing practices for ReactJS in 2022*
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using the TypeScript template.
 
@@ -13,8 +13,11 @@ npm install
 # Run in development mode (on port 3000):
 npm start
 
-# Run tests: 
+# Run unit and integration tests: 
 npm test
+
+# Run e2e tests:
+npm run cypress:open
 ```
 
 ## Links and relevant documentation:

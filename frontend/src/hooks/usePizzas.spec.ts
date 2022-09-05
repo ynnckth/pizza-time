@@ -22,8 +22,8 @@ describe('usePizzas', () => {
   });
 
   it('should return error message, empty pizzas and loading false', async () => {
-    let errorMessage = 'Something went wrong';
-    jest.spyOn(PizzaApi, 'fetchAllPizzas').mockImplementation(() => Promise.reject(errorMessage));
+    const errorMessage = 'Something went wrong';
+    jest.spyOn(PizzaApi, 'fetchAllPizzas').mockImplementation(() => Promise.reject({ message: errorMessage }));
 
     const { result } = renderHook<
       unknown,
