@@ -25,7 +25,7 @@ describe('Marketplace', () => {
   it('should show loading spinner while retrieving pizzas', () => {
     server.use(
       rest.get(pizzasBaseUrl, async (req, res, ctx) => {
-        return res(ctx.json([]), ctx.delay('infinite'));
+        return res(ctx.json([]), ctx.delay(1000));
       })
     );
 
