@@ -46,6 +46,7 @@ const Marketplace = () => {
         color="primary"
         aria-label="checkout"
         onClick={() => navigate(Page.CHECKOUT)}
+        data-testid={TestId.MARKETPLACE_CART_BUTTON}
       >
         <Typography data-testid={TestId.MARKETPLACE_NO_OF_ORDER_ITEMS}>{orderItems.length}</Typography>
         <ShoppingCart />
