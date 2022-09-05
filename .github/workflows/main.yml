@@ -22,8 +22,8 @@ jobs:
           npm test
 
       - name: e2e tests
-        # TODO: Instead of running frontend in dev mode, build and serve statically (currently lots of unnecessary overhead with transpiling, etc.)
         run: |
           cd frontend
-          npm run start:ci
-          npm run cypress:run
+          npm run build
+          npm run serve
+          npm run cypress:run -- --config baseUrl=http://localhost:8000
