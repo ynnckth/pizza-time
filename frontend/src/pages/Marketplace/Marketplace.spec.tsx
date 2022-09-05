@@ -66,13 +66,12 @@ describe('Marketplace', () => {
     const errorMessage = 'Failed to fetch pizzas';
     server.use(
       rest.get(pizzasBaseUrl, async (req, res, ctx) => {
-        return res(ctx.status(500), ctx.json({ message: errorMessage }));
+        return res(ctx.status(500), ctx.json({ error: errorMessage }));
       })
     );
 
     renderWithProviders(<Marketplace />);
 
-    const displayedError = { status: 500, data: { message: errorMessage } };
-    await waitFor(() => expect(screen.getByText(JSON.stringify(displayedError))).toBeVisible());
+    await waitFor(() => expect(screen.getByText(errorMessage)).toBeVisible());
   });
 });

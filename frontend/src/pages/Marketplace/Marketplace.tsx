@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, Fab, Typography } from '@mui/material';
 import PizzaCard from '../../components/PizzaCard/PizzaCard';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
@@ -8,19 +8,12 @@ import { useAppSelector } from '../../redux/Hooks';
 import { selectOrderItems } from '../../redux/Slices/Checkout/CheckoutSlice';
 import { TestId } from '../../testUtils/TestId';
 import { Page } from '../../Navigation';
-import { toast } from 'react-toastify';
 import { useFetchAllPizzasQuery } from '../../redux/Slices/Marketplace/MarketplaceSlice';
 
 const Marketplace = () => {
   const navigate = useNavigate();
-  const { data: pizzas, error: errorLoadingPizzas, isLoading: loadingPizzas } = useFetchAllPizzasQuery();
+  const { data: pizzas, isLoading: loadingPizzas } = useFetchAllPizzasQuery();
   const orderItems = useAppSelector(selectOrderItems);
-
-  useEffect(() => {
-    if (errorLoadingPizzas) {
-      toast.error(JSON.stringify(errorLoadingPizzas));
-    }
-  }, [errorLoadingPizzas]);
 
   if (loadingPizzas) {
     return <LoadingSpinner loadingText={'Retrieving available pizzas ...'} />;
