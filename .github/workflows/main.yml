@@ -20,3 +20,8 @@ jobs:
           cd frontend
           npm install
           npm test
+
+      - name: e2e
+        run: |
+          npm run start:ci
+          npm run cypress:run
