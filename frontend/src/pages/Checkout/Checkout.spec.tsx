@@ -99,4 +99,15 @@ describe('Checkout', () => {
     await waitFor(() => expect(screen.getByText(PLACE_ORDER_SUCCESS_MESSAGE)).toBeVisible());
     await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith(Page.PAST_ORDERS));
   });
+
+  it('should show empty cart message if all order items are removed from cart', async () => {
+    renderWithProviders(<Checkout />, {
+      preloadedState: { checkout: { ...initialCheckoutState, orderItems: [pizzaMargherita] } },
+    });
+
+    fireEvent.click(screen.queryAllByTestId(TestId.CHECKOUT_REMOVE_ORDER_ITEM)[0]);
+
+    await waitFor(() => expect(screen.queryByTestId(TestId.CHECKOUT_EMPTY_CART_MESSAGE)).toBeVisible());
+    await waitFor(() => expect(screen.queryByTestId(TestId.CHECKOUT_ORDER_ITEM)).toBeFalsy());
+  });
 });
