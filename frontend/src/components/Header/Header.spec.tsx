@@ -1,9 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import Header from './Header';
+import { renderWithProviders } from '../../testUtils/renderWithProviders';
 
 describe('Header', () => {
   it('should render header title', () => {
-    render(<Header title="Test header" />);
+    renderWithProviders(<Header title="Test header" />);
     expect(screen.getByText('Test header')).toBeVisible();
   });
 });
