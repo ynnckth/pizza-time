@@ -33,6 +33,7 @@ npm run cypress:open
 - Form validation using Formik
 - Unit and integration testing including a real store using react-testing-library and msw for mocking network requests
 - E2e testing using cypress (stubbed network calls)
+- Client code generation based on OpenAPI specification
 
 ## Links and relevant documentation
 - [Redux Toolkit TypeScript quick start](https://redux-toolkit.js.org/tutorials/typescript)
@@ -46,6 +47,8 @@ npm run cypress:open
 ## Code Generation
 
 This project uses Swagger CodeGen and OpenAPI to generate parts of the consumer code for the order service API.
+
+![Code generation process](./doc/openapi-codegen.png)
 
 ### Prerequisites
 - The provided script expects you to have `docker` installed on your machine to be able to execute the code generation
