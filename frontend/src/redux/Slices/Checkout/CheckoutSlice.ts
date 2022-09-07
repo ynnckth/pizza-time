@@ -4,6 +4,7 @@ import { PlaceOrderRequest, PlaceOrderResponse } from '../../../api/Order/PlaceO
 import { fetchPastOrders, placeOrder as placeOrderApi } from '../../../api/Order/OrderApi';
 import { RequestStatus } from '../../../utils/RequestStatus';
 import { OrderItem } from '../../../../../codegen/generated';
+import { toast } from 'react-toastify';
 
 export interface CheckoutState {
   orderItems: OrderItem[];
@@ -39,6 +40,7 @@ export const checkoutSlice = createSlice({
   reducers: {
     addOrderItem: (state, action: PayloadAction<OrderItem>) => {
       state.orderItems.push(action.payload);
+      toast.success(`Added one pizza ${action.payload.name}`);
     },
     removeOrderItem: (state, action: PayloadAction<OrderItem>) => {
       const filtered = state.orderItems.filter((orderItem) => orderItem.name === action.payload.name);
