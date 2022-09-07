@@ -64,7 +64,6 @@ This project uses Swagger CodeGen and OpenAPI to generate parts of the consumer 
 ### Open Points
 
 - Where to place the generated code ideally?
-- Should you check in the generated code to git or exclude and generate every time on-demand?
 - How to split the generated APIs into separate files (e.g. by controller)?
 - Currently only consuming generated models (interfaces) -> check what else can be used from the generated code
 - Differences to [OpenAPI Tools / openapi-generator](https://github.com/OpenAPITools/openapi-generator)?
