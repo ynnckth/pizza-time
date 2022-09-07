@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchAllPizzas } from '../api/Pizza/PizzaApi';
-import {OrderItem} from '../models/OrderItem';
+import { OrderItem } from '../../../codegen/generated';
 
 /**
  * @deprecated Prefer using RTK Query to fetch pizzas instead of this custom hook (see MarketplaceSlice.ts)

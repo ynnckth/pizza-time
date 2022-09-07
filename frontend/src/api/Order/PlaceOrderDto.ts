@@ -1,5 +1,4 @@
-import { OrderItem } from '../../models/OrderItem';
-import { Customer } from '../../models/Customer';
+import { Customer, OrderItem } from '../../../../codegen/generated';
 
 export interface PlaceOrderRequest {
   orderItems: OrderItem[];

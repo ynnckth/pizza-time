@@ -2,7 +2,7 @@ import usePizzas from './usePizzas';
 import * as PizzaApi from '../api/Pizza/PizzaApi';
 import { renderHook } from '@testing-library/react-hooks';
 import { waitFor } from '@testing-library/react';
-import {OrderItem} from '../models/OrderItem';
+import { OrderItem } from '../../../codegen/generated';
 
 jest.mock('../api/Pizza/PizzaApi');
 

@@ -1,0 +1,156 @@
+openapi: 3.0.3
+info:
+  title: Pizza Time
+  description: |-
+    This is a sample Pizza Time Server based on the OpenAPI 3.0 specification.
+  version: 0.0.1
+servers:
+  - url: http://localhost:3000/api
+tags:
+  - name: order
+    description: Anything related to orders
+  - name: pizza
+    description: Anything related to pizzas
+
+paths:
+  /pizzas:
+    get:
+      tags:
+        - pizza
+      summary: Get all pizzas
+      description: Get all available pizzas
+      operationId: getPizzas
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderItem'
+        '405':
+          description: Invalid input
+
+  /orders:
+    get:
+      tags:
+        - order
+      summary: Get all orders
+      description: Get all past orders
+      operationId: getOrders
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+
+    post:
+      tags:
+        - order
+      summary: Place a new order
+      description: Place a new order in the store
+      operationId: placeOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaceOrderRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '405':
+          description: Invalid input
+
+components:
+  schemas:
+    OrderItem:
+      type: object
+      required:
+        - name
+        - description
+        - unitPrice
+        - isAvailable
+      properties:
+        name:
+          type: string
+          example: Salami
+        description:
+          type: string
+          example: Tasty and spicy
+        unitPrice:
+          type: number
+          format: double
+          example: 12.99
+        isAvailable:
+          type: boolean
+          example: true
+
+    Order:
+      type: object
+      required:
+        - orderId
+        - orderDate
+        - orderItems
+      properties:
+        orderId:
+          type: string
+          example: "1000"
+        orderDate:
+          type: string
+          format: date-time
+        customer:
+          $ref: '#/components/schemas/Customer'
+        orderItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+
+    PlaceOrderRequest:
+      type: object
+      required:
+        - customer
+        - orderItems
+        - orderDate
+      properties:
+        orderDate:
+          type: string
+          format: date-time
+        orderItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        customer:
+          $ref: '#/components/schemas/Customer'
+
+    Customer:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - email
+      properties:
+        firstName:
+          type: string
+          example: "John"
+        lastName:
+          type: string
+          example: "Doe"
+        email:
+          type: string
+          example: "john.doe@test.com"
+
+  requestBodies:
+    PlaceOrderRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PlaceOrderRequest'

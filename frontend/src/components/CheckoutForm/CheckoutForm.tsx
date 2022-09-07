@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button, TextField, Typography } from '@mui/material';
 import { TestId } from '../../testUtils/TestId';
-import { CheckoutFormValues } from '../../models/CheckoutFormValues';
+import { CheckoutFormValues } from './CheckoutFormValues';
 
 interface Props {
   onSubmit: (checkoutFormValues: CheckoutFormValues) => void;

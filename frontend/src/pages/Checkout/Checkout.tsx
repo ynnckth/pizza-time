@@ -18,7 +18,7 @@ import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { toast } from 'react-toastify';
 import { RequestStatus } from '../../utils/RequestStatus';
 import CheckoutForm from '../../components/CheckoutForm/CheckoutForm';
-import { CheckoutFormValues } from '../../models/CheckoutFormValues';
+import { CheckoutFormValues } from '../../components/CheckoutForm/CheckoutFormValues';
 
 export const PLACE_ORDER_SUCCESS_MESSAGE = 'Successfully placed order';
 

@@ -1,9 +1,9 @@
-import { OrderItem } from '../../../models/OrderItem';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../Store';
 import { PlaceOrderRequest, PlaceOrderResponse } from '../../../api/Order/PlaceOrderDto';
 import { fetchPastOrders, placeOrder as placeOrderApi } from '../../../api/Order/OrderApi';
 import { RequestStatus } from '../../../utils/RequestStatus';
+import { OrderItem } from '../../../../../codegen/generated';
 
 export interface CheckoutState {
   orderItems: OrderItem[];

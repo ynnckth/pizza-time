@@ -1,4 +1,4 @@
-import {OrderItem} from '../../models/OrderItem';
+import { OrderItem } from '../../../../codegen/generated';
 
 export const pizzasBaseUrl = '/api/pizzas';
 

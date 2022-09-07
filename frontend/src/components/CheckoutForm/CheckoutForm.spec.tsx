@@ -2,7 +2,7 @@ import { renderWithProviders } from '../../testUtils/renderWithProviders';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import CheckoutForm from './CheckoutForm';
 import { TestId } from '../../testUtils/TestId';
-import { CheckoutFormValues } from '../../models/CheckoutFormValues';
+import { CheckoutFormValues } from './CheckoutFormValues';
 
 describe('CheckoutForm', () => {
   it('should render all form fields', () => {
