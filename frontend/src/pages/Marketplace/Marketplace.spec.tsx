@@ -45,7 +45,7 @@ describe('Marketplace', () => {
     expect(screen.queryByTestId(TestId.LOADING_SPINNER)).toBeFalsy();
   });
 
-  it('should update displayed items in cart', async () => {
+  it('should add items to cart', async () => {
     server.use(
       rest.get(pizzasBaseUrl, async (req, res, ctx) => {
         return res(ctx.json([pizzaMargherita]), ctx.delay(150));
@@ -60,6 +60,7 @@ describe('Marketplace', () => {
     fireEvent.click(screen.getByTestId(TestId.MARKETPLACE_ADD_PIZZA_TO_CART));
 
     expect(screen.getByTestId(TestId.MARKETPLACE_NO_OF_ORDER_ITEMS)).toHaveTextContent('3');
+    await waitFor(() => expect(screen.getAllByText(`Added one pizza ${pizzaMargherita.name}`)).toHaveLength(3));
   });
 
   it('should show error toast if failed to fetch pizzas', async () => {

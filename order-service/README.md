@@ -9,3 +9,7 @@ The API specification can be found at:
 Alternatively, render the API specification in Swagger-UI:
 > http://localhost:8080/swagger-ui.html
 
+
+## Useful links & documentation
+
+- [Documenting a Spring REST API using OpenAPI 3.0](https://www.baeldung.com/spring-rest-openapi-documentation)
