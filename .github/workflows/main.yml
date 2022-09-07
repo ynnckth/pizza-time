@@ -16,7 +16,9 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Generate order-service API client code
-        run: ./openapi-codegen.sh
+        run: |
+          chmod +x openapi-codegen.sh
+          ./openapi-codegen.sh
 
       - name: Install dependencies
         run: | 
