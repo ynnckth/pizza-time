@@ -1,19 +1,19 @@
 import usePizzas from './usePizzas';
 import * as PizzaApi from '../api/Pizza/PizzaApi';
-import { Pizza } from '../models/Pizza';
 import { renderHook } from '@testing-library/react-hooks';
 import { waitFor } from '@testing-library/react';
+import {OrderItem} from '../models/OrderItem';
 
 jest.mock('../api/Pizza/PizzaApi');
 
 describe('usePizzas', () => {
   it('should return pizzas with loading state false and undefined error state', async () => {
     const testPizza = { name: 'Hawaii', description: 'Test pizza', unitPrice: 5, isAvailable: true };
-    jest.spyOn(PizzaApi, 'fetchAllPizzas').mockImplementation(() => Promise.resolve([testPizza] as Pizza[]));
+    jest.spyOn(PizzaApi, 'fetchAllPizzas').mockImplementation(() => Promise.resolve([testPizza] as OrderItem[]));
 
     const { result } = renderHook<
       unknown,
-      { pizzas: Pizza[]; loadingPizzas: boolean; errorLoadingPizzas: string | undefined }
+      { pizzas: OrderItem[]; loadingPizzas: boolean; errorLoadingPizzas: string | undefined }
     >(() => usePizzas());
 
     await waitFor(() => expect(result.current.pizzas).toContainEqual(testPizza));
@@ -27,7 +27,7 @@ describe('usePizzas', () => {
 
     const { result } = renderHook<
       unknown,
-      { pizzas: Pizza[]; loadingPizzas: boolean; errorLoadingPizzas: string | undefined }
+      { pizzas: OrderItem[]; loadingPizzas: boolean; errorLoadingPizzas: string | undefined }
     >(() => usePizzas());
 
     await waitFor(() => expect(result.current.errorLoadingPizzas).toBe(errorMessage));

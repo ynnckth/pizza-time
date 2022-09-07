@@ -1,5 +1,7 @@
 # Pizza Time!
 
+![CI](https://github.com/ynnckth/pizza-time/actions/workflows/main.yml/badge.svg)
+
 *Exploring state-of-the-art state management and testing practices for ReactJS in 2022*
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using the TypeScript template.

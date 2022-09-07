@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Pizza } from '../../../models/Pizza';
+import {OrderItem} from '../../../models/OrderItem';
 
 export interface MarketplaceState {}
 
@@ -9,7 +9,7 @@ export const marketplaceApi = createApi({
   reducerPath: 'marketplaceApi',
   baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
   endpoints: (builder) => ({
-    fetchAllPizzas: builder.query<Pizza[], void>({
+    fetchAllPizzas: builder.query<OrderItem[], void>({
       query: () => '/pizzas',
     }),
   }),

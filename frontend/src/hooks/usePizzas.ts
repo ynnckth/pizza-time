@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Pizza } from '../models/Pizza';
 import { fetchAllPizzas } from '../api/Pizza/PizzaApi';
+import {OrderItem} from '../models/OrderItem';
 
 /**
  * @deprecated Prefer using RTK Query to fetch pizzas instead of this custom hook (see MarketplaceSlice.ts)
  */
 const usePizzas = () => {
-  const [pizzas, setPizzas] = useState<Pizza[]>([]);
+  const [pizzas, setPizzas] = useState<OrderItem[]>([]);
   const [loadingPizzas, setLoadingPizzas] = useState<boolean>(false);
   const [errorLoadingPizzas, setErrorLoadingPizzas] = useState<string | undefined>(undefined);
 

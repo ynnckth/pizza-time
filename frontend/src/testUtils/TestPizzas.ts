@@ -1,13 +1,13 @@
-import { Pizza } from '../models/Pizza';
+import {OrderItem} from '../models/OrderItem';
 
-export const pizzaMargherita: Pizza = {
+export const pizzaMargherita: OrderItem = {
   name: 'Margherita',
   description: 'Plain and boring',
   unitPrice: 10,
   isAvailable: true,
 };
 
-export const pizzaSalami: Pizza = {
+export const pizzaSalami: OrderItem = {
   name: 'Salami',
   description: 'Nice and spicy!',
   unitPrice: 12,

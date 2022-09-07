@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
-import { Pizza } from '../../models/Pizza';
 import pizzaImage from '../../assets/pizza.png';
 import { TestId } from '../../testUtils/TestId';
 import { useAppDispatch } from '../../redux/Hooks';
 import { addOrderItem } from '../../redux/Slices/Checkout/CheckoutSlice';
+import {OrderItem} from '../../models/OrderItem';
 
 interface Props {
-  pizza: Pizza;
+  pizza: OrderItem;
 }
 
 const PizzaCard: React.FC<Props> = ({ pizza }) => {
