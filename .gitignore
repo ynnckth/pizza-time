@@ -3,6 +3,9 @@
 # IDE
 /.idea
 
+# Generated code from openapi codegen
+/generated
+
 # dependencies
 /node_modules
 /.pnp
