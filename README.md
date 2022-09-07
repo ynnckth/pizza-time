@@ -41,6 +41,7 @@ npm run cypress:open
 - [Guidelines for writing tests for Redux](https://redux.js.org/usage/writing-tests)
 - [Redux Toolkit Query Overview](https://redux-toolkit.js.org/rtk-query/overview)
 
+---
 
 ## Code Generation
 
@@ -53,8 +54,8 @@ This project uses Swagger CodeGen and OpenAPI to generate parts of the consumer 
 
 ```shell
 # Generate the TypeScript client code:
-./swagger-codegen-docker.sh
-# This will create a folder `generated` containing the generated code
+./openapi-codegen.sh
+# This will create a folder `generated` containing the generated client code
 ```
 
 ### Open Points
