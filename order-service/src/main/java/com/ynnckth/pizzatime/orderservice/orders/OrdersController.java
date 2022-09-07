@@ -1,5 +1,6 @@
 package com.ynnckth.pizzatime.orderservice.orders;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,11 @@ public class OrdersController {
         this.orderRepository = orderRepository;
     }
 
+    @Operation(
+            summary = "Get all orders",
+            description = "Get all past orders",
+            operationId = "getOrders",
+            tags = "Order")
     @GetMapping
     public ResponseEntity<List<Order>> getOrders() {
         log.info("Requested orders");
@@ -27,6 +33,11 @@ public class OrdersController {
     }
 
     // TODO: improve response: https://www.baeldung.com/spring-boot-json
+    @Operation(
+            summary = "Place a new order",
+            description = "Place a new order in the store",
+            operationId = "placeOrder",
+            tags = "Order")
     @PostMapping
     public ResponseEntity<Order> placeOrder(@RequestBody PlaceOrderRequest placeOrderRequest) {
         log.info("Placed new order");

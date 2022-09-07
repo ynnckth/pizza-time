@@ -1,5 +1,6 @@
 package com.ynnckth.pizzatime.orderservice.orderitems;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,11 @@ public class OrderItemsController {
         this.orderItemRepository = orderItemRepository;
     }
 
+    @Operation(
+            summary = "Get all order items",
+            description = "Get all available order items",
+            operationId = "getOrderItems",
+            tags = "OrderItem")
     @GetMapping
     public ResponseEntity<List<OrderItem>> getOrderItems() {
         log.info("Requested order items");
