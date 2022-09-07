@@ -175,19 +175,19 @@ export interface PlaceOrderRequest {
      * @type {string}
      * @memberof PlaceOrderRequest
      */
-    orderDate?: string;
+    orderDate: string;
     /**
      * 
      * @type {Array<OrderItem>}
      * @memberof PlaceOrderRequest
      */
-    orderItems?: Array<OrderItem>;
+    orderItems: Array<OrderItem>;
     /**
      * 
      * @type {Customer}
      * @memberof PlaceOrderRequest
      */
-    customer?: Customer;
+    customer: Customer;
 }
 /**
  * OrderItemsControllerApi - fetch parameter creator

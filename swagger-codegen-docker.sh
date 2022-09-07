@@ -8,14 +8,20 @@ set -x # prints a trace of executed commands
 set -e # immediately exit if any command has a non-zero exit status
 
 SWAGGER_CODEGEN_VERSION=3.0.35
-API_SPEC_FILENAME=openapi.json
+API_SPEC_FILEPATH="order-service/openapi/openapi.json"
 
-# TODO: trigger maven build here to generate openapi.json
+# Generate the latest OpenAPI specification file
+echo "Generating OpenAPI specification file ..."
+cd order-service
+./mvnw verify
+cd ..
+echo "Successfully generated OpenAPI specification file under ${API_SPEC_FILEPATH}"
 
+# TODO: check where to place the generated client code (currently outside of the frontend consuming it)
+echo "Generating client code for ${API_SPEC_FILEPATH} ..."
 docker run --rm -v ${PWD}:/local swaggerapi/swagger-codegen-cli-v3:$SWAGGER_CODEGEN_VERSION generate \
-    -i /local/$API_SPEC_FILENAME \
+    -i /local/$API_SPEC_FILEPATH \
     -l typescript-fetch \
     -o /local/generated
 
-# Copy the generated client API to the frontend source folder
-cp -R generated ../../
+echo "Done"
