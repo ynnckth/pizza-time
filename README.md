@@ -6,6 +6,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using the TypeScript template.
 
+## Pre-requisites
+
+- Only tested on a mac development machine (some scripts might need adaption to work on windows)
+- `Node` and npm LTS must be installed on dev machine
+- `Docker` must be installed on dev machine
+
 ## Available scripts
 
 ```shell
