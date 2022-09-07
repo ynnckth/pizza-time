@@ -9,6 +9,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available scripts
 
 ```shell
+# Generate client code for order-service API (required for frontend):
+./openapi-codegen.sh
+
 # Install dependencies:
 npm install
 

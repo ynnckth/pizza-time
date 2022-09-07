@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// TODO: Generate openapi documentation:
-//  https://www.baeldung.com/spring-rest-openapi-documentation#openapi-annotations
 @Slf4j
 @RestController
 @RequestMapping("/api/orders")
