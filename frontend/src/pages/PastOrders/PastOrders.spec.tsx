@@ -3,12 +3,12 @@ import { screen, waitFor } from '@testing-library/react';
 import PastOrders from './PastOrders';
 import { rest } from 'msw';
 import { ordersBaseUrl } from '../../api/Order/OrderApi';
-import { PlaceOrderResponse } from '../../api/Order/PlaceOrderDto';
 import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestPizzas';
 import { TestId } from '../../testUtils/TestId';
 import { setupServer } from 'msw/node';
+import { Order } from '../../../../generated';
 
-const samplePastOrders: PlaceOrderResponse[] = [
+const samplePastOrders: Order[] = [
   {
     orderId: '0001',
     orderItems: [pizzaMargherita, pizzaSalami],

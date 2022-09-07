@@ -1,15 +1,15 @@
-import { OrderItem } from '../../../codegen/generated';
+import { OrderItem } from '../../../generated';
 
 export const pizzaMargherita: OrderItem = {
   name: 'Margherita',
   description: 'Plain and boring',
   unitPrice: 10,
-  isAvailable: true,
+  available: true,
 };
 
 export const pizzaSalami: OrderItem = {
   name: 'Salami',
   description: 'Nice and spicy!',
   unitPrice: 12,
-  isAvailable: true,
+  available: true,
 };

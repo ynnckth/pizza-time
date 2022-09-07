@@ -16,8 +16,8 @@
 
 ## Open Points
 
+- Where to place the generated code ideally?
 - How to split the generated APIs into separate files (e.g. by controller)?
-- How to generate the API spec based on the existing backend code?
 - Currently only consuming generated models (interfaces) -> check what else can be used from the generated code
 
 ## Links and Documentation

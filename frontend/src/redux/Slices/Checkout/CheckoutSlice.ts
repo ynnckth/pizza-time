@@ -1,16 +1,15 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../Store';
-import { PlaceOrderRequest, PlaceOrderResponse } from '../../../api/Order/PlaceOrderDto';
 import { fetchPastOrders, placeOrder as placeOrderApi } from '../../../api/Order/OrderApi';
 import { RequestStatus } from '../../../utils/RequestStatus';
-import { OrderItem } from '../../../../../codegen/generated';
 import { toast } from 'react-toastify';
+import { Order, OrderItem, PlaceOrderRequest } from '../../../../../generated';
 
 export interface CheckoutState {
   orderItems: OrderItem[];
   placeOrderStatus: RequestStatus;
   placeOrderError?: string;
-  pastOrders: PlaceOrderResponse[];
+  pastOrders: Order[];
   fetchPastOrdersStatus: RequestStatus;
   fetchPastOrdersError?: string;
 }

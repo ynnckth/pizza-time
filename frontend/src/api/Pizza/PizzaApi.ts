@@ -1,4 +1,4 @@
-import { OrderItem } from '../../../../codegen/generated';
+import { OrderItem } from '../../../../generated';
 
 export const pizzasBaseUrl = '/api/pizzas';
 

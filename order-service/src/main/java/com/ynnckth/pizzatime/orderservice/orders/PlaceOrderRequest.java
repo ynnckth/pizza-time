@@ -4,6 +4,7 @@ import com.ynnckth.pizzatime.orderservice.orderitems.OrderItem;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.lang.NonNull;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 public class PlaceOrderRequest {
-    private String orderDate;
-    private List<OrderItem> orderItems;
-    private Customer customer;
+    @NonNull private String orderDate;
+    @NonNull private List<OrderItem> orderItems;
+    @NonNull private Customer customer;
 }

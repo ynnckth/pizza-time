@@ -1,19 +1,19 @@
-import {PlaceOrderRequest, PlaceOrderResponse} from './PlaceOrderDto';
+import { Order, PlaceOrderRequest } from '../../../../generated';
 
 export const ordersBaseUrl = '/api/orders';
 
-export const fetchPastOrders = async (): Promise<PlaceOrderResponse[]> => {
+export const fetchPastOrders = async (): Promise<Order[]> => {
   const response = await fetch(ordersBaseUrl);
   return response.json();
 };
 
-export const placeOrder = async (placeOrderRequest: PlaceOrderRequest): Promise<PlaceOrderResponse> => {
+export const placeOrder = async (placeOrderRequest: PlaceOrderRequest): Promise<Order> => {
   const response = await fetch(ordersBaseUrl, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(placeOrderRequest)
+    body: JSON.stringify(placeOrderRequest),
   });
   return response.json();
 };

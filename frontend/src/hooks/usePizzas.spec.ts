@@ -2,13 +2,13 @@ import usePizzas from './usePizzas';
 import * as PizzaApi from '../api/Pizza/PizzaApi';
 import { renderHook } from '@testing-library/react-hooks';
 import { waitFor } from '@testing-library/react';
-import { OrderItem } from '../../../codegen/generated';
+import { OrderItem } from '../../../generated';
 
 jest.mock('../api/Pizza/PizzaApi');
 
 describe('usePizzas', () => {
   it('should return pizzas with loading state false and undefined error state', async () => {
-    const testPizza = { name: 'Hawaii', description: 'Test pizza', unitPrice: 5, isAvailable: true };
+    const testPizza: OrderItem = { name: 'Hawaii', description: 'Test pizza', unitPrice: 5, available: true };
     jest.spyOn(PizzaApi, 'fetchAllPizzas').mockImplementation(() => Promise.resolve([testPizza] as OrderItem[]));
 
     const { result } = renderHook<

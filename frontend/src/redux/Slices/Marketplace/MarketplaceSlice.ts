@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { OrderItem } from '../../../../../codegen/generated';
+import { OrderItem } from '../../../../../generated';
 
 export interface MarketplaceState {}
 

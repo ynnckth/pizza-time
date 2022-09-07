@@ -8,7 +8,7 @@ import { Page } from '../../Navigation';
 import { rest } from 'msw';
 import { ordersBaseUrl } from '../../api/Order/OrderApi';
 import { setupServer } from 'msw/node';
-import { PlaceOrderResponse } from '../../api/Order/PlaceOrderDto';
+import { Order } from '../../../../generated';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -20,7 +20,7 @@ jest.mock('react-router-dom', () => ({
 export const handlers = [
   rest.post(ordersBaseUrl, async (req, res, ctx) => {
     const request = await req.json();
-    const placeOrderResponse: PlaceOrderResponse = {
+    const placeOrderResponse: Order = {
       orderId: 'a367772a-eda3-4057-95f9-a26a83b15f62',
       ...request,
     };
