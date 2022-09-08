@@ -54,6 +54,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Generate order-service API client code
+        run: ./openapi-codegen.sh
+
       # Vercel only knows the following environments: development | preview | production
       - name: Deploy frontend to Vercel
         run: |
@@ -62,5 +65,5 @@ jobs:
           npx vercel build --token=${{ secrets.VERCEL_TOKEN }}
           npx vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
 
-  # TODO: trigger warm up request to backend and wait for readiness before running environment tests
+  # TODO: probably need to trigger warm up request to backend and wait for readiness before running environment tests
   # TODO: run environment smoke e2e tests against test environment
