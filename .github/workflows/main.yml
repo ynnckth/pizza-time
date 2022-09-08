@@ -19,17 +19,17 @@ jobs:
       - name: Generate order-service API client code
         run: ./openapi-codegen.sh
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
         run: | 
           cd frontend
           npm install
 
-      - name: Run unit and integration tests
+      - name: Run frontend unit and integration tests
         run: |
           cd frontend
           CI=true npm test
 
-      - name: Run e2e tests
+      - name: Run frontend e2e tests
         run: |
           cd frontend
           npm run build
