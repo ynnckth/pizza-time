@@ -9,7 +9,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-frontend:
+  # TODO: currently all steps are in sequence -> check how to split into several jobs that can run in parallel
+  build-test-deploy:
     runs-on: ubuntu-latest
     
     steps:
@@ -35,21 +36,10 @@ jobs:
           npm run serve
           npm run cypress:run -- --config baseUrl=http://localhost:8000
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs:
-      - test-frontend
+      # TODO: build, test and deploy backend to Heroku
 
-    steps:
-      # TODO: build and deploy backend to Heroku
-
-      - name: Build frontend for deployment
-        run: |
-          cd frontend
-          npm install
-          npm run build
-
-      - uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Deploy frontend to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pizza-time-frontend"
