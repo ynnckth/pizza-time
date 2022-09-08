@@ -2,9 +2,11 @@ import { TestId } from '../../src/testUtils/TestId';
 
 describe('Place order', () => {
   beforeEach(() => {
-    cy.intercept('GET', '**/api/pizzas', { fixture: 'getPizzas.json' });
-    cy.intercept('POST', '**/api/orders', { fixture: 'postOrder.json' });
-    cy.intercept('GET', '**/api/orders', { fixture: 'getOrders.json' });
+    if (Cypress.env('stubbedNetworkRequests')) {
+      cy.intercept('GET', '**/api/pizzas', { fixture: 'getPizzas.json' });
+      cy.intercept('POST', '**/api/orders', { fixture: 'postOrder.json' });
+      cy.intercept('GET', '**/api/orders', { fixture: 'getOrders.json' });
+    }
 
     cy.visit('/');
     cy.getByTestId(TestId.APP_TITLE).should('be.visible');
