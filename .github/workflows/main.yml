@@ -43,11 +43,17 @@ jobs:
     steps:
       # TODO: build and deploy backend to Heroku
 
-      - name: Deploy frontend to GitHub Pages
+      - name: Build frontend for deployment
         run: |
           cd frontend
           npm install
           npm run build
-          npm run deploy
+
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "pizza-time-frontend"
+          heroku_email: "yannickstreit@hotmail.com"
+          appdir: "frontend/build"
 
       # TODO: run environment smoke e2e tests against test environment

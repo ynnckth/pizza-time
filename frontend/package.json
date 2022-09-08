@@ -30,9 +30,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "serve": "serve -p 8000 build & wait-on http://localhost:8000",
-    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
+    "serve": "serve -p 8000 build & wait-on http://localhost:8000",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
   },
@@ -58,12 +57,10 @@
     "@redux-devtools/core": "^3.13.1",
     "@testing-library/react-hooks": "^8.0.1",
     "cypress": "^10.7.0",
-    "gh-pages": "^4.0.0",
     "msw": "^0.46.1",
     "prettier": "2.7.1",
     "serve": "^14.0.1",
     "wait-on": "^6.0.1"
   },
-  "homepage": "https://ynnckth.github.io/pizza-time",
   "proxy": "http://localhost:8080"
 }

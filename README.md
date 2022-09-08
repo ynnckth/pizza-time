@@ -83,3 +83,20 @@ This project uses Swagger CodeGen and OpenAPI to generate parts of the consumer 
 - [Swagger Editor - Online](https://editor.swagger.io/)
 - [Swagger Pet Store Github Repo (reference implementation)](https://github.com/swagger-api/swagger-petstore)
 - [npm package that wraps Swagger CodeGen](https://www.npmjs.com/package/@openapitools/openapi-generator-cli)
+
+---
+
+## Test Strategy
+
+This application defines the following test boundaries: 
+
+Frontend: 
+- Unit and integration tests that cover the collaboration of one or more components in collaboration with Redux (including middleware). Mocking happens on the network layer.
+- E2e tests using Cypress. These tests cover the frontend e2e and run against a fully running frontend. Network requests are intercepted and stubbed.
+
+Backend:
+- Tbd
+
+E2e environment tests: 
+- These tests run against a target environment (e.g. test environment) and cover the integration of front- and backend.
+- They should run automatically prior to a release.
