@@ -36,14 +36,13 @@ jobs:
           npm run serve
           npm run cypress:run -- --config baseUrl=http://localhost:8000
 
-      # TODO: build, test and deploy backend to Heroku
-
-      - name: Deploy frontend to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Deploy dockerized backend to Heroku
+        uses: gonuit/heroku-docker-deploy@v1.3.3
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "pizza-time-frontend"
-          heroku_email: "yannickstreit@hotmail.com"
-          appdir: "frontend/build"
+          email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          dockerfile_directory: ./oder-service
 
+      # TODO: deploy frontend to Vercel or Netlify (free)
       # TODO: run environment smoke e2e tests against test environment
