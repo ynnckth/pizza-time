@@ -74,4 +74,6 @@ jobs:
         run: |
           cd frontend
           npm install
-          npm run cypress:run -- --config baseUrl=https://frontend-ynnckth.vercel.app --env stubbedNetworkRequests=false
+          npm run cypress:run -- --config baseUrl=${{ secrets.VERCEL_APP_URL }} --env stubbedNetworkRequests=false
+
+  # TODO: a production release should follow after successfully passing the e2e-environment-tests on the previous environments

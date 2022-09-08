@@ -20,7 +20,7 @@ describe('Place order', () => {
     cy.shouldNotShowAnyFormValidationErrors();
     cy.getByTestId(TestId.CHECKOUT_PLACE_ORDER_BUTTON).click();
     cy.shouldShowFormValidationErrors();
-    cy.enterFormValues('John', 'Doe', 'john.doe@gmail.com');
+    cy.enterFormValues('Cypress_John', 'Cypress_Doe', 'john.doe@cypress.com');
     cy.shouldNotShowAnyFormValidationErrors();
     cy.placeOrder();
   });
