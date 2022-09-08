@@ -7,7 +7,7 @@ export const initialMarketplaceState: MarketplaceState = {};
 
 export const marketplaceApi = createApi({
   reducerPath: 'marketplaceApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${process.env.REACT_APP_ORDER_SERVICE_API_BASE_URL}/api` }),
   endpoints: (builder) => ({
     fetchAllPizzas: builder.query<OrderItem[], void>({
       query: () => '/pizzas',

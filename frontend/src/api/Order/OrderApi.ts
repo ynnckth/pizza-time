@@ -1,6 +1,6 @@
 import { Order, PlaceOrderRequest } from '../../../../generated';
 
-export const ordersBaseUrl = '/api/orders';
+export const ordersBaseUrl = `${process.env.REACT_APP_ORDER_SERVICE_API_BASE_URL}/api/orders`;
 
 export const fetchPastOrders = async (): Promise<Order[]> => {
   const response = await fetch(ordersBaseUrl);

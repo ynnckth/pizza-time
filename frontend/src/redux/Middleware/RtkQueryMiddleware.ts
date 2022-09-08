@@ -9,10 +9,15 @@ import { toast } from 'react-toastify';
 export const rtkQueryErrorNotifications: Middleware = () => (next) => (action) => {
   // RTK Query uses `createAsyncThunk` from redux-toolkit under the hood, so we're able to utilize these matchers!
   if (isRejectedWithValue(action)) {
-    if (typeof action.payload.data === 'string') {
-      toast.error(action.payload.data);
-    } else {
-      toast.error(action.payload.data.error);
+    // TODO: improve this error handling as we might not always know the structure of the response
+    try {
+      if (typeof action.payload.data === 'string') {
+        toast.error(action.payload.data);
+      } else {
+        toast.error(action.payload.data.error);
+      }
+    } catch (e) {
+      console.error('Failed to handle rejected query', JSON.stringify(action));
     }
   }
   return next(action);

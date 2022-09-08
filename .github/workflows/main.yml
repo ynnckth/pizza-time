@@ -44,7 +44,8 @@ jobs:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           dockerfile_directory: ./order-service
 
-      - name: Install and configure Vercel CLI
+      # Vercel only knows the following environments: development | preview | production
+      - name: Deploy frontend to Vercel
         run: |
           cd frontend
           npm install --global vercel@latest

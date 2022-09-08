@@ -117,3 +117,7 @@ The frontend is deployed as a static site to Vercel:
 > https://frontend-six-gold.vercel.app
 
 Manage through [Vercel dashboard](https://vercel.com/dashboard)
+
+**Tech debt** 
+- It looks like Vercel only allows overriding one single build command. If we have multiple environments, the current approach of overriding the build command in `vercel.json` is not possible.
+- The current free services come with their limitations. Consider deploying to a cloud environment instead.
