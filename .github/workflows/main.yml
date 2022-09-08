@@ -44,6 +44,13 @@ jobs:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           dockerfile_directory: ./order-service
 
-      # TODO: deploy frontend to Vercel or Netlify (free)
-      # TODO: trigger warm up request to backend and wait for readiness
+      - name: Install and configure Vercel CLI
+        run: |
+          cd frontend
+          npm install --global vercel@latest
+          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+          vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+      # TODO: trigger warm up request to backend and wait for readiness before running environment tests
       # TODO: run environment smoke e2e tests against test environment

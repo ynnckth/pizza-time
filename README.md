@@ -100,3 +100,20 @@ Backend:
 E2e environment tests: 
 - These tests run against a target environment (e.g. test environment) and cover the integration of front- and backend.
 - They should run automatically prior to a release.
+
+---
+
+
+## Runtime Environments
+
+There is currently only one target environment that is configured in the CD pipeline as follows:
+
+The backend is currently deployed to Heroku (free tier): 
+> https://pizza-time-backend.herokuapp.com/swagger-ui/index.html
+
+Manage through [Heroku dashboard](https://dashboard.heroku.com/apps/pizza-time-backend).
+
+The frontend is deployed as a static site to Vercel: 
+> https://frontend-six-gold.vercel.app
+
+Manage through [Vercel dashboard](https://vercel.com/dashboard)
