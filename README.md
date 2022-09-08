@@ -103,6 +103,8 @@ E2e environment tests:
 - These tests run against a target environment (e.g. test environment) and cover the integration of front- and backend.
 - They should run automatically prior to a release.
 
+![Testing boundaries](./doc/testing-boundaries.png)
+
 ---
 
 
