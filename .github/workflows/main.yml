@@ -42,7 +42,8 @@ jobs:
           email: ${{ secrets.HEROKU_EMAIL }}
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-          dockerfile_directory: ./oder-service
+          dockerfile_directory: ./order-service
 
       # TODO: deploy frontend to Vercel or Netlify (free)
+      # TODO: trigger warm up request to backend and wait for readiness
       # TODO: run environment smoke e2e tests against test environment
