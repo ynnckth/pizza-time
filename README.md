@@ -43,6 +43,8 @@ npm run cypress:open
 - Unit and integration testing including a real store using react-testing-library and msw for mocking network requests
 - E2e testing using cypress (stubbed network calls)
 - Client code generation based on OpenAPI specification
+- CI/CD pipeline with GitHub Pages, including testing and deployment
+- Environment e2e testing for full integration tests of front- and backend
 
 ## Links and relevant documentation
 - [Redux Toolkit TypeScript quick start](https://redux-toolkit.js.org/tutorials/typescript)
