@@ -9,10 +9,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  # TODO: currently all steps are in sequence -> check how to split into several jobs that can run in parallel
-  build-test-deploy:
+  test-frontend:
     runs-on: ubuntu-latest
-    
     steps:
       - uses: actions/checkout@v3
 
@@ -36,6 +34,12 @@ jobs:
           npm run serve
           npm run cypress:run -- --config baseUrl=http://localhost:8000
 
+  deploy-backend:
+    runs-on: ubuntu-latest
+    needs: [test-frontend]
+    steps:
+      - uses: actions/checkout@v3
+
       - name: Deploy dockerized backend to Heroku
         uses: gonuit/heroku-docker-deploy@v1.3.3
         with:
@@ -43,6 +47,12 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           dockerfile_directory: ./order-service
+
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    needs: [test-frontend]
+    steps:
+      - uses: actions/checkout@v3
 
       # Vercel only knows the following environments: development | preview | production
       - name: Deploy frontend to Vercel
@@ -52,5 +62,5 @@ jobs:
           npx vercel build --token=${{ secrets.VERCEL_TOKEN }}
           npx vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
 
-      # TODO: trigger warm up request to backend and wait for readiness before running environment tests
-      # TODO: run environment smoke e2e tests against test environment
+  # TODO: trigger warm up request to backend and wait for readiness before running environment tests
+  # TODO: run environment smoke e2e tests against test environment
