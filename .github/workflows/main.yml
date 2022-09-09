@@ -15,9 +15,11 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Print build version information
+        env:
+          COMMIT_HASH: $(git rev-parse --short "$GITHUB_SHA")
         run: |
           echo Build number: ${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
-          echo Commit hash: $(git rev-parse --short "$GITHUB_SHA")
+          echo Commit hash: $COMMIT_HASH
 
       - name: Generate order-service API client code
         run: ./openapi-codegen.sh
