@@ -14,6 +14,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Print current build version
+        run: |
+          echo ${{ github.run_id }}
+          echo ${{ github.run_number }}
+          echo ${{ github.run_attempt }}
+          echo ${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
+
+      - name: Print commit that triggered the build
+        run: |
+          echo $(git rev-parse --short "$GITHUB_SHA")
+
       - name: Generate order-service API client code
         run: ./openapi-codegen.sh
 
@@ -34,6 +45,7 @@ jobs:
           npm run serve
           npm run cypress:run -- --config baseUrl=http://localhost:8000
 
+  # TODO: currently frontend and backend are always deployed together -> check how to decouple this based on the changed files
   deploy-backend:
     runs-on: ubuntu-latest
     needs: [test-frontend]

@@ -118,7 +118,7 @@ The backend is currently deployed to Heroku (free tier):
 Manage through [Heroku dashboard](https://dashboard.heroku.com/apps/pizza-time-backend).
 
 The frontend is deployed as a static site to Vercel: 
-> https://frontend-six-gold.vercel.app
+> https://frontend-ynnckth.vercel.app/
 
 Manage through [Vercel dashboard](https://vercel.com/dashboard)
 
