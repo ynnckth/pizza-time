@@ -14,16 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Print current build version
+      - name: Print build version information
         run: |
-          echo ${{ github.run_id }}
-          echo ${{ github.run_number }}
-          echo ${{ github.run_attempt }}
-          echo ${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
-
-      - name: Print commit that triggered the build
-        run: |
-          echo $(git rev-parse --short "$GITHUB_SHA")
+          echo Build number: ${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
+          echo Commit hash: $(git rev-parse --short "$GITHUB_SHA")
 
       - name: Generate order-service API client code
         run: ./openapi-codegen.sh
@@ -71,10 +65,13 @@ jobs:
 
       # Vercel only knows the following environments: development | preview | production
       - name: Deploy frontend to Vercel
+        env:
+          BUILD_VERSION: ${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
+          COMMIT_HASH: $(git rev-parse --short "$GITHUB_SHA")
         run: |
           cd frontend
           npx vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-          npx vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          npx vercel -e REACT_APP_BUILD_VERSION=$BUILD_VERSION build -e REACT_APP_COMMIT_HASH=$COMMIT_HASH --token=${{ secrets.VERCEL_TOKEN }}
           npx vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
 
   e2e-environment-tests:
