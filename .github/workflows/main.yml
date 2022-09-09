@@ -68,7 +68,7 @@ jobs:
         run: |
           cd frontend
           npx vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-          npx vercel -e BUILD_VERSION=${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }} -e COMMIT_HASH=$(git rev-parse --short "$GITHUB_SHA") build --token=${{ secrets.VERCEL_TOKEN }}
+          npx vercel build --build-env BUILD_VERSION=${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }} --build-env COMMIT_HASH=$(git rev-parse --short "$GITHUB_SHA") --token=${{ secrets.VERCEL_TOKEN }}
           npx vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
 
   e2e-environment-tests:
