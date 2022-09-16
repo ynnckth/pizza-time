@@ -25,7 +25,7 @@ const Marketplace = () => {
         width: '100%',
         height: '100%',
         display: 'flex',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-around',
         flexWrap: 'wrap',
       }}
     >
@@ -43,7 +43,9 @@ const Marketplace = () => {
         onClick={() => navigate(Page.CHECKOUT)}
         data-testid={TestId.MARKETPLACE_CART_BUTTON}
       >
-        <Typography data-testid={TestId.MARKETPLACE_NO_OF_ORDER_ITEMS}>{orderItems.length}</Typography>
+        {orderItems.length > 0 && (
+          <Typography data-testid={TestId.MARKETPLACE_NO_OF_ORDER_ITEMS}>{orderItems.length}</Typography>
+        )}
         <ShoppingCart />
       </Fab>
     </Box>

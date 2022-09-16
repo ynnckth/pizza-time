@@ -14,7 +14,7 @@ const PizzaCard: React.FC<Props> = ({ pizza }) => {
   const dispatch = useAppDispatch();
 
   return (
-    <Card sx={{ width: 200, height: 320, margin: 2 }} data-testid={TestId.MARKETPLACE_PIZZA_CARD}>
+    <Card sx={{ width: 250, height: 320, margin: 2 }} data-testid={TestId.MARKETPLACE_PIZZA_CARD}>
       <CardMedia component="img" height="140" src={pizzaImage} alt="delicious pizza" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

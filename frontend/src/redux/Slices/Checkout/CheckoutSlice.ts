@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../Store';
 import { fetchPastOrders, placeOrder as placeOrderApi } from '../../../api/Order/OrderApi';
 import { RequestStatus } from '../../../utils/RequestStatus';
-import { toast } from 'react-toastify';
 import { Order, OrderItem, PlaceOrderRequest } from '../../../../generated';
 
 export interface CheckoutState {
@@ -39,7 +38,6 @@ export const checkoutSlice = createSlice({
   reducers: {
     addOrderItem: (state, action: PayloadAction<OrderItem>) => {
       state.orderItems.push(action.payload);
-      toast.success(`Added one pizza ${action.payload.name}`);
     },
     removeOrderItem: (state, action: PayloadAction<OrderItem>) => {
       const filtered = state.orderItems.filter((orderItem) => orderItem.name === action.payload.name);

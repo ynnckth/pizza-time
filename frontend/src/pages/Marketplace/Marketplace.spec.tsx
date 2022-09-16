@@ -55,12 +55,12 @@ describe('Marketplace', () => {
     renderWithProviders(<Marketplace />);
 
     await waitFor(() => expect(screen.queryByTestId(TestId.LOADING_SPINNER)).toBeFalsy());
+    expect(screen.queryByTestId(TestId.MARKETPLACE_NO_OF_ORDER_ITEMS)).toBeFalsy();
     fireEvent.click(screen.getByTestId(TestId.MARKETPLACE_ADD_PIZZA_TO_CART));
     fireEvent.click(screen.getByTestId(TestId.MARKETPLACE_ADD_PIZZA_TO_CART));
     fireEvent.click(screen.getByTestId(TestId.MARKETPLACE_ADD_PIZZA_TO_CART));
 
     expect(screen.getByTestId(TestId.MARKETPLACE_NO_OF_ORDER_ITEMS)).toHaveTextContent('3');
-    await waitFor(() => expect(screen.getAllByText(`Added one pizza ${pizzaMargherita.name}`)).toHaveLength(3));
   });
 
   it('should show error toast if failed to fetch pizzas', async () => {

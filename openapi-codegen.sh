@@ -18,7 +18,6 @@ cd order-service
 cd ..
 echo "Successfully generated OpenAPI specification file under ${API_SPEC_FILEPATH}"
 
-# TODO: check where to place the generated client code (currently outside of the frontend consuming it)
 echo "Generating client code for ${API_SPEC_FILEPATH} ..."
 docker run --rm -v ${PWD}:/local swaggerapi/swagger-codegen-cli-v3:$SWAGGER_CODEGEN_VERSION generate \
     -i /local/$API_SPEC_FILEPATH \

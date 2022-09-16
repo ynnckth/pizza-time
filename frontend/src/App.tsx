@@ -17,7 +17,7 @@ const App = () => {
   return (
     <Box sx={{ width: '100vw', height: '100vh' }}>
       <Header title={'🍕 Pizza Time!'} />
-      <Box sx={{ bgcolor: 'white', height: 'calc(100% - 45px)' }}>
+      <Box sx={{ bgcolor: 'white', minHeight: 'calc(100% - 45px)' }}>
         <Routes>
           <Route path="marketplace" element={<Marketplace />} />
           <Route path="checkout" element={<Checkout />} />
