@@ -71,7 +71,7 @@ jobs:
         run: |
           cd frontend
           npx vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-          npx vercel --build-env REACT_APP_ORDER_SERVICE_API_BASE_URL="https://pizza-time-backend.herokuapp.com" --build-env BUILD_VERSION=${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }} --build-env COMMIT_HASH=${{ env.COMMIT_HASH }} --token=${{ secrets.VERCEL_TOKEN }}
+          npx vercel --build-env REACT_APP_ORDER_SERVICE_API_BASE_URL=https://pizza-time-backend.herokuapp.com --build-env BUILD_VERSION=${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }} --build-env COMMIT_HASH=${{ env.COMMIT_HASH }} --token=${{ secrets.VERCEL_TOKEN }}
           npx vercel build --token=${{ secrets.VERCEL_TOKEN }}
           npx vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
 

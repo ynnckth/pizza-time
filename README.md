@@ -44,6 +44,7 @@ npm run cypress:open
 - E2e testing using cypress (stubbed network calls)
 - Client code generation based on OpenAPI specification
 - CI/CD pipeline with GitHub Pages, including testing and deployment
+- Embed build version information into deployed frontend artifact based on commit hash and build number
 - Environment e2e testing for full integration tests of front- and backend
 
 ## Links and relevant documentation
