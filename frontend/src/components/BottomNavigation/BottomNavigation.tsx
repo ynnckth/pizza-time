@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Page } from '../../Navigation';
 import { useAppDispatch, useAppSelector } from '../../redux/Hooks';
 import { selectSelectedTabIndex, setSelectedTabIndex } from '../../redux/Slices/Navigation/NavigationSlice';
+import { TestId } from '../../testUtils/TestId';
 
 const BottomNavigation = () => {
   const dispatch = useAppDispatch();
@@ -17,9 +18,27 @@ const BottomNavigation = () => {
       value={selectedTabIndex}
       onChange={(event, newSelectedTabIndex) => dispatch(setSelectedTabIndex(newSelectedTabIndex))}
     >
-      <BottomNavigationAction label="Marketplace" icon={<LocalPizza />} component={Link} to={Page.MARKETPLACE} />
-      <BottomNavigationAction label="Checkout" icon={<ShoppingCart />} component={Link} to={Page.CHECKOUT} />
-      <BottomNavigationAction label="Past orders" icon={<Toc />} component={Link} to={Page.PAST_ORDERS} />
+      <BottomNavigationAction
+        label="Marketplace"
+        icon={<LocalPizza />}
+        component={Link}
+        to={Page.MARKETPLACE}
+        data-testid={TestId.BOTTOM_NAVIGATION_MARKETPLACE}
+      />
+      <BottomNavigationAction
+        label="Checkout"
+        icon={<ShoppingCart />}
+        component={Link}
+        to={Page.CHECKOUT}
+        data-testid={TestId.BOTTOM_NAVIGATION_CHECKOUT}
+      />
+      <BottomNavigationAction
+        label="Past orders"
+        icon={<Toc />}
+        component={Link}
+        to={Page.PAST_ORDERS}
+        data-testid={TestId.BOTTOM_NAVIGATION_PAST_ORDERS}
+      />
     </MuiBottomNavigation>
   );
 };

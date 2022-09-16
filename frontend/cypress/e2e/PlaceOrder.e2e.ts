@@ -13,10 +13,23 @@ describe('Place order', () => {
     cy.shouldShowInitialMarketplace();
   });
 
+  it('should navigate to marketplace, checkout and past orders', () => {
+    cy.clickOnCheckoutTab();
+    cy.shouldShowEmptyCheckoutPage();
+
+    cy.clickOnMarketplaceTab();
+    cy.shouldShowInitialMarketplace();
+
+    cy.clickOnPastOrdersTab();
+    cy.shouldShowPastOrdersPage();
+  });
+
   it('should add and remove items from order and place order', () => {
+    const initialNumberOfOrderItems = 3;
+
     cy.addItemsToCart();
-    cy.goToCheckout(3);
-    cy.removeFirstItemFromCart(2);
+    cy.goToCheckout(initialNumberOfOrderItems);
+    cy.removeFirstItemFromCart(initialNumberOfOrderItems - 1);
     cy.shouldNotShowAnyFormValidationErrors();
     cy.getByTestId(TestId.CHECKOUT_PLACE_ORDER_BUTTON).click();
     cy.shouldShowFormValidationErrors();

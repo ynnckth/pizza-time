@@ -17,11 +17,18 @@ declare global {
       shouldShowInitialMarketplace(): Chainable<Element>;
       addItemsToCart(): Chainable<Element>;
       goToCheckout(expectedNoOfOrderItems: number): Chainable<Element>;
+      shouldShowEmptyCheckoutPage(): Chainable<Element>;
       removeFirstItemFromCart(expectedNoOfOrderItemsAfterRemoving: number): Chainable<Element>;
       shouldNotShowAnyFormValidationErrors(): Chainable<Element>;
       shouldShowFormValidationErrors(): Chainable<Element>;
       enterFormValues(firstName: string, lastName: string, email: string): Chainable<Element>;
       placeOrder(): Chainable<Element>;
+      shouldShowPastOrdersPage(): Chainable<Element>;
+
+      // Bottom navigation
+      clickOnMarketplaceTab(): Chainable<Element>;
+      clickOnCheckoutTab(): Chainable<Element>;
+      clickOnPastOrdersTab(): Chainable<Element>;
     }
   }
 }

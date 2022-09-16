@@ -37,7 +37,17 @@ Cypress.Commands.add('goToCheckout', (expectedNoOfOrderItems: number) => {
   cy.getByTestId(TestId.LOADING_SPINNER).should('not.exist');
   cy.getByTestId(TestId.MARKETPLACE_PIZZA_CARD).should('not.exist');
   cy.getByTestId(TestId.MARKETPLACE_CART_BUTTON).should('not.exist');
+  cy.getByTestId(TestId.CHECKOUT_EMPTY_CART_MESSAGE).should('not.exist');
   cy.getByTestId(TestId.CHECKOUT_ORDER_ITEM).should('have.length', expectedNoOfOrderItems);
+});
+
+Cypress.Commands.add('shouldShowEmptyCheckoutPage', () => {
+  cy.url().should('include', '/checkout');
+  cy.getByTestId(TestId.LOADING_SPINNER).should('not.exist');
+  cy.getByTestId(TestId.MARKETPLACE_PIZZA_CARD).should('not.exist');
+  cy.getByTestId(TestId.MARKETPLACE_CART_BUTTON).should('not.exist');
+  cy.getByTestId(TestId.CHECKOUT_ORDER_ITEM).should('not.exist');
+  cy.getByTestId(TestId.CHECKOUT_EMPTY_CART_MESSAGE).should('be.visible');
 });
 
 Cypress.Commands.add('removeFirstItemFromCart', (expectedNoOfOrderItemsAfterRemoving: number) => {
@@ -68,7 +78,23 @@ Cypress.Commands.add('enterFormValues', (firstName: string, lastName: string, em
 Cypress.Commands.add('placeOrder', () => {
   cy.getByTestId(TestId.CHECKOUT_PLACE_ORDER_BUTTON).click();
   cy.get('.Toastify').contains('Successfully placed order');
+  cy.shouldShowPastOrdersPage();
+});
+
+Cypress.Commands.add('shouldShowPastOrdersPage', () => {
   cy.url().should('include', '/orders');
   cy.getByTestId(TestId.PAST_ORDERS_NO_ORDERS_MESSAGE).should('not.exist');
   cy.getByTestId(TestId.PAST_ORDERS_ORDER).should('have.length.greaterThan', 1);
+});
+
+Cypress.Commands.add('clickOnMarketplaceTab', () => {
+  cy.getByTestId(TestId.BOTTOM_NAVIGATION_MARKETPLACE).click();
+});
+
+Cypress.Commands.add('clickOnCheckoutTab', () => {
+  cy.getByTestId(TestId.BOTTOM_NAVIGATION_CHECKOUT).click();
+});
+
+Cypress.Commands.add('clickOnPastOrdersTab', () => {
+  cy.getByTestId(TestId.BOTTOM_NAVIGATION_PAST_ORDERS).click();
 });
