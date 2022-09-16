@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Marketplace from './pages/Marketplace/Marketplace';
-import { Navigate, Route, Routes } from 'react-router-dom';
 import Checkout from './pages/Checkout/Checkout';
 import PastOrders from './pages/PastOrders/PastOrders';
+import BottomNavigation from './components/BottomNavigation/BottomNavigation';
 
 const App = () => {
   useEffect(() => {
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="*" element={<Navigate replace to="/marketplace" />} />
         </Routes>
       </Box>
+      <BottomNavigation />
     </Box>
   );
 };

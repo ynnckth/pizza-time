@@ -41,7 +41,7 @@ describe('Marketplace', () => {
     await waitFor(() => expect(screen.queryAllByTestId(TestId.MARKETPLACE_PIZZA_CARD)).toHaveLength(testPizzas.length));
     expect(screen.queryByText(pizzaMargherita.name)).toBeVisible();
     expect(screen.queryByText(pizzaSalami.name)).toBeVisible();
-    expect(screen.getByTestId(TestId.MARKETPLACE_NO_OF_ORDER_ITEMS)).toHaveTextContent('0');
+    expect(screen.queryByTestId(TestId.MARKETPLACE_NO_OF_ORDER_ITEMS)).toBeFalsy();
     expect(screen.queryByTestId(TestId.LOADING_SPINNER)).toBeFalsy();
   });
 

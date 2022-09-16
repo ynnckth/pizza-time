@@ -4,13 +4,15 @@ import PizzaCard from '../../components/PizzaCard/PizzaCard';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { ShoppingCart } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../redux/Hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/Hooks';
 import { selectOrderItems } from '../../redux/Slices/Checkout/CheckoutSlice';
 import { TestId } from '../../testUtils/TestId';
-import { Page } from '../../Navigation';
+import { getTabIndexForPage, Page } from '../../Navigation';
 import { useFetchAllPizzasQuery } from '../../redux/Slices/Marketplace/MarketplaceSlice';
+import { setSelectedTabIndex } from '../../redux/Slices/Navigation/NavigationSlice';
 
 const Marketplace = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { data: pizzas, isLoading: loadingPizzas } = useFetchAllPizzasQuery();
   const orderItems = useAppSelector(selectOrderItems);
@@ -35,12 +37,15 @@ const Marketplace = () => {
       <Fab
         sx={{
           position: 'fixed',
-          bottom: (theme) => theme.spacing(2),
+          bottom: (theme) => theme.spacing(10),
           right: (theme) => theme.spacing(2),
         }}
         color="primary"
         aria-label="checkout"
-        onClick={() => navigate(Page.CHECKOUT)}
+        onClick={() => {
+          navigate(Page.CHECKOUT);
+          dispatch(setSelectedTabIndex(getTabIndexForPage(Page.CHECKOUT)));
+        }}
         data-testid={TestId.MARKETPLACE_CART_BUTTON}
       >
         {orderItems.length > 0 && (

@@ -19,7 +19,7 @@ Cypress.Commands.add('getByTestId', (testId: string, options?: Partial<TypeOptio
 Cypress.Commands.add('shouldShowInitialMarketplace', () => {
   cy.getByTestId(TestId.MARKETPLACE_PIZZA_CARD).should('have.length.greaterThan', 1);
   cy.getByTestId(TestId.MARKETPLACE_CART_BUTTON).should('be.visible');
-  cy.getByTestId(TestId.MARKETPLACE_NO_OF_ORDER_ITEMS).should('have.text', 0);
+  cy.getByTestId(TestId.MARKETPLACE_NO_OF_ORDER_ITEMS).should('not.exist');
 });
 
 Cypress.Commands.add('addItemsToCart', () => {

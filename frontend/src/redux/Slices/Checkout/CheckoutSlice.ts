@@ -3,6 +3,11 @@ import { RootState } from '../../Store';
 import { fetchPastOrders, placeOrder as placeOrderApi } from '../../../api/Order/OrderApi';
 import { RequestStatus } from '../../../utils/RequestStatus';
 import { Order, OrderItem, PlaceOrderRequest } from '../../../../generated';
+import { setSelectedTabIndex } from '../Navigation/NavigationSlice';
+import { getTabIndexForPage, Page } from '../../../Navigation';
+import { toast } from 'react-toastify';
+import { PLACE_ORDER_SUCCESS_MESSAGE } from '../../../pages/Checkout/Checkout';
+import { NavigateFunction } from 'react-router/lib/hooks';
 
 export interface CheckoutState {
   orderItems: OrderItem[];
@@ -22,10 +27,21 @@ export const initialCheckoutState: CheckoutState = {
   fetchPastOrdersError: undefined,
 };
 
+interface PlaceOrderAction {
+  placeOrderRequest: PlaceOrderRequest;
+  navigate: NavigateFunction;
+}
+
 // TODO: check how this thunk could be replaced with a RTK Query mutation
-export const placeOrder = createAsyncThunk('checkout/placeOrder', async (placeOrderRequest: PlaceOrderRequest) => {
-  return placeOrderApi(placeOrderRequest);
-});
+export const placeOrder = createAsyncThunk(
+  'checkout/placeOrder',
+  async (placeOrderAction: PlaceOrderAction, thunkAPI) => {
+    thunkAPI.dispatch(setSelectedTabIndex(getTabIndexForPage(Page.PAST_ORDERS)));
+    const response = await placeOrderApi(placeOrderAction.placeOrderRequest);
+    placeOrderAction.navigate(Page.PAST_ORDERS);
+    return response;
+  }
+);
 
 // TODO: check if it would simplify things to use RTK Query instead of this thunk
 export const getPastOrders = createAsyncThunk('checkout/getPastOrders', async () => {
@@ -59,10 +75,12 @@ export const checkoutSlice = createSlice({
         state.placeOrderStatus = RequestStatus.SUCCESSFUL;
         state.pastOrders.push(action.payload);
         state.orderItems = [];
+        toast.success(PLACE_ORDER_SUCCESS_MESSAGE);
       })
       .addCase(placeOrder.rejected, (state, action) => {
         state.placeOrderStatus = RequestStatus.FAILED;
         state.placeOrderError = action.error.message;
+        toast.error(action.error.message);
       })
 
       .addCase(getPastOrders.pending, (state) => {

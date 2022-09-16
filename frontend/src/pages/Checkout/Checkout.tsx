@@ -1,18 +1,15 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { Box, Container, Divider, IconButton, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import {
   placeOrder,
   removeOrderItem,
   selectOrderItems,
-  selectPastOrders,
-  selectPlaceOrderError,
   selectPlaceOrderStatus,
 } from '../../redux/Slices/Checkout/CheckoutSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/Hooks';
 import { TestId } from '../../testUtils/TestId';
 import { useNavigate } from 'react-router-dom';
-import { Page } from '../../Navigation';
 import { calculateTotalOrderPrice } from '../../utils/calculateTotalOrderPrice';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { toast } from 'react-toastify';
@@ -22,32 +19,16 @@ import { CheckoutFormValues } from '../../components/CheckoutForm/CheckoutFormVa
 
 export const PLACE_ORDER_SUCCESS_MESSAGE = 'Successfully placed order';
 
-// TODO (low): add back button to overview
 const Checkout = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const orderItems = useAppSelector(selectOrderItems);
-  const placeOrderError = useAppSelector(selectPlaceOrderError);
   const placeOrderStatus = useAppSelector(selectPlaceOrderStatus);
-  const orderHistory = useAppSelector(selectPastOrders);
 
   const getTotalPrice = useCallback(() => {
     return calculateTotalOrderPrice(orderItems);
   }, [orderItems]);
-
-  useEffect(() => {
-    if (placeOrderError && placeOrderStatus === RequestStatus.FAILED) {
-      toast.error(placeOrderError);
-    }
-  }, [placeOrderError, placeOrderStatus]);
-
-  useEffect(() => {
-    if (placeOrderStatus === RequestStatus.SUCCESSFUL && !placeOrderError) {
-      toast.success(PLACE_ORDER_SUCCESS_MESSAGE);
-      navigate(Page.PAST_ORDERS);
-    }
-  }, [orderHistory, placeOrderStatus, navigate, placeOrderError]);
 
   const validateAndPlaceOrder = (checkoutFormValues: CheckoutFormValues) => {
     if (orderItems.length < 1) {
@@ -56,9 +37,12 @@ const Checkout = () => {
     }
     dispatch(
       placeOrder({
-        orderItems: orderItems,
-        customer: { ...checkoutFormValues },
-        orderDate: new Date().toISOString(),
+        placeOrderRequest: {
+          orderItems: orderItems,
+          customer: { ...checkoutFormValues },
+          orderDate: new Date().toISOString(),
+        },
+        navigate,
       })
     );
   };
