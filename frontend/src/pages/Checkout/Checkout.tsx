@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Box, Container, Divider, IconButton, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Alert, Box, Container, Divider, IconButton, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import {
   placeOrder,
@@ -48,7 +48,11 @@ const Checkout = () => {
   };
 
   if (orderItems.length < 1) {
-    return <Typography data-testid={TestId.CHECKOUT_EMPTY_CART_MESSAGE}>Your cart is empty.</Typography>;
+    return (
+      <Alert severity="info" data-testid={TestId.CHECKOUT_EMPTY_CART_MESSAGE}>
+        Your cart is empty.
+      </Alert>
+    );
   }
 
   if (placeOrderStatus === RequestStatus.LOADING) {

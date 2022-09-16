@@ -13,7 +13,7 @@ const BottomNavigation = () => {
 
   return (
     <MuiBottomNavigation
-      sx={{ position: 'fixed', bottom: 0, width: '100%' }}
+      sx={{ position: 'sticky', bottom: 0, width: '100%' }}
       showLabels
       value={selectedTabIndex}
       onChange={(event, newSelectedTabIndex) => dispatch(setSelectedTabIndex(newSelectedTabIndex))}
