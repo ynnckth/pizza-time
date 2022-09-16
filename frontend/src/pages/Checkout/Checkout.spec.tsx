@@ -8,7 +8,7 @@ import { Page } from '../../Navigation';
 import { rest } from 'msw';
 import { ordersBaseUrl } from '../../api/Order/OrderApi';
 import { setupServer } from 'msw/node';
-import { Order } from '../../../../generated';
+import { Order } from '../../../generated';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({

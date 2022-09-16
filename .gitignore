@@ -4,7 +4,7 @@
 /.idea
 
 # Generated code from openapi codegen
-/generated
+/frontend/generated
 
 # dependencies
 /node_modules

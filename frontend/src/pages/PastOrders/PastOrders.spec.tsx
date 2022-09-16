@@ -6,7 +6,7 @@ import { ordersBaseUrl } from '../../api/Order/OrderApi';
 import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestPizzas';
 import { TestId } from '../../testUtils/TestId';
 import { setupServer } from 'msw/node';
-import { Order } from '../../../../generated';
+import { Order } from '../../../generated';
 
 const samplePastOrders: Order[] = [
   {

@@ -3,7 +3,7 @@ import { RootState } from '../../Store';
 import { fetchPastOrders, placeOrder as placeOrderApi } from '../../../api/Order/OrderApi';
 import { RequestStatus } from '../../../utils/RequestStatus';
 import { toast } from 'react-toastify';
-import { Order, OrderItem, PlaceOrderRequest } from '../../../../../generated';
+import { Order, OrderItem, PlaceOrderRequest } from '../../../../generated';
 
 export interface CheckoutState {
   orderItems: OrderItem[];

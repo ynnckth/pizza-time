@@ -1,7 +1,7 @@
 import usePizzas from './usePizzas';
 import * as PizzaApi from '../api/Pizza/PizzaApi';
 import { waitFor, renderHook } from '@testing-library/react';
-import { OrderItem } from '../../../generated';
+import { OrderItem } from '../../generated';
 
 jest.mock('../api/Pizza/PizzaApi');
 

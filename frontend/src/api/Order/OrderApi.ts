@@ -1,4 +1,4 @@
-import { Order, PlaceOrderRequest } from '../../../../generated';
+import { Order, PlaceOrderRequest } from '../../../generated';
 
 export const ordersBaseUrl = `${process.env.REACT_APP_ORDER_SERVICE_API_BASE_URL}/api/orders`;
 

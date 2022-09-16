@@ -9,7 +9,7 @@ set -e # immediately exit if any command has a non-zero exit status
 
 SWAGGER_CODEGEN_VERSION=3.0.35
 API_SPEC_FILEPATH="order-service/openapi/openapi.json"
-GENERATED_CODE_OUTPUT_PATH="generated"
+GENERATED_CODE_OUTPUT_PATH="frontend/generated"
 
 # Generate the latest OpenAPI specification file
 echo "Generating OpenAPI specification file ..."

@@ -1,4 +1,4 @@
-import { OrderItem } from '../../../../generated';
+import { OrderItem } from '../../../generated';
 
 export const pizzasBaseUrl = `${process.env.REACT_APP_ORDER_SERVICE_API_BASE_URL}/api/pizzas`;
 
