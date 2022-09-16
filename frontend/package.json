@@ -31,7 +31,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:preview": "env-cmd -f .env.preview react-scripts build",
     "test": "react-scripts test",
     "serve": "serve -p 8000 build & wait-on http://localhost:8000",
     "cypress:open": "cypress open",
