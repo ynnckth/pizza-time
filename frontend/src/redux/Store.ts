@@ -1,13 +1,11 @@
 import { Action, combineReducers, configureStore, PreloadedState, ThunkAction } from '@reduxjs/toolkit';
 import { checkoutSlice } from './Slices/Checkout/CheckoutSlice';
-import { themeSlice } from './Slices/Theme/ThemeSlice';
 import { marketplaceApi } from './Slices/Marketplace/MarketplaceSlice';
 import { rtkQueryErrorNotifications } from './Middleware/RtkQueryMiddleware';
 import { navigationSlice } from './Slices/Navigation/NavigationSlice';
 
 const rootReducer = combineReducers({
   checkout: checkoutSlice.reducer,
-  theme: themeSlice.reducer,
   navigation: navigationSlice.reducer,
   [marketplaceApi.reducerPath]: marketplaceApi.reducer,
 });
