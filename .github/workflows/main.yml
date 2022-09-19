@@ -41,7 +41,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: cypress-video-artifacts
+          name: cypress-artifacts
           path: |
             frontend/cypress/videos
             frontend/cypress/snapshots
