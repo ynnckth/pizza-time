@@ -18,8 +18,7 @@ const App = () => {
   return (
     <Box sx={{ width: '100vw', height: '100vh' }}>
       <Header title={'🍕 Pizza Time!'} />
-      {/* Subtracting header and bottom navigation height from total height */}
-      <Box sx={{ bgcolor: 'white', minHeight: 'calc(100% - 101px)' }}>
+      <Box sx={{ bgcolor: 'white', minHeight: 'var(--page-height)' }}>
         <Routes>
           <Route path="marketplace" element={<Marketplace />} />
           <Route path="checkout" element={<Checkout />} />

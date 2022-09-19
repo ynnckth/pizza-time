@@ -11,7 +11,7 @@ const LoadingSpinner: React.FC<Props> = ({ loadingText }) => {
     <Box
       sx={{
         width: '100%',
-        height: '100%',
+        height: 'var(--page-height)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
