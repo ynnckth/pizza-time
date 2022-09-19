@@ -13,17 +13,6 @@ describe('Place order', () => {
     cy.shouldShowInitialMarketplace();
   });
 
-  it('should navigate to marketplace, checkout and past orders', () => {
-    cy.clickOnCheckoutTab();
-    cy.shouldShowEmptyCheckoutPage();
-
-    cy.clickOnMarketplaceTab();
-    cy.shouldShowInitialMarketplace();
-
-    cy.clickOnPastOrdersTab();
-    cy.shouldShowPastOrdersPage();
-  });
-
   it('should add and remove items from order and place order', () => {
     const initialNumberOfOrderItems = 3;
 

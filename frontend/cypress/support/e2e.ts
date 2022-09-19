@@ -29,6 +29,8 @@ declare global {
       clickOnMarketplaceTab(): Chainable<Element>;
       clickOnCheckoutTab(): Chainable<Element>;
       clickOnPastOrdersTab(): Chainable<Element>;
+
+      matchImageSnapshot(fileName: string, options?: any): Chainable<Element>;
     }
   }
 }
