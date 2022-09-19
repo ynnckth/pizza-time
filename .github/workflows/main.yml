@@ -39,6 +39,11 @@ jobs:
           npm run serve
           npm run cypress:run -- --config baseUrl=http://localhost:8000
 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: cypress-video-artifacts
+          path: frontend/cypress/videos
+
   # TODO: currently frontend and backend are always deployed together -> check how to decouple this based on the changed files
   deploy-backend:
     runs-on: ubuntu-latest
