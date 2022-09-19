@@ -46,6 +46,7 @@ npm run cypress:open
 - CI/CD pipeline with GitHub Pages, including testing and deployment
 - Embed build version information into deployed frontend artifact based on commit hash and build number
 - Environment e2e testing for full integration tests of front- and backend
+- Visual regression testing with Cypress snapshot plugin
 
 ## Links and relevant documentation
 - [Redux Toolkit TypeScript quick start](https://redux-toolkit.js.org/tutorials/typescript)
