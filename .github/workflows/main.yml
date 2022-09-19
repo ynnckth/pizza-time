@@ -42,7 +42,9 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: cypress-video-artifacts
-          path: frontend/cypress/videos
+          path: |
+            frontend/cypress/videos
+            frontend/cypress/snapshots
 
   # TODO: currently frontend and backend are always deployed together -> check how to decouple this based on the changed files
   deploy-backend:
