@@ -1,4 +1,4 @@
-import { OrderItem } from '../../generated';
+import { OrderItem } from '../../../generated';
 
 export const pizzaMargherita: OrderItem = {
   name: 'Margherita',

@@ -1,5 +1,5 @@
 import PizzaCard from './PizzaCard';
-import { pizzaMargherita } from '../../testUtils/TestPizzas';
+import { pizzaMargherita } from '../../testUtils/TestData/TestPizzas';
 import { renderWithProviders } from '../../testUtils/renderWithProviders';
 
 describe('PizzaCard', () => {

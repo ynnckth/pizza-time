@@ -2,7 +2,7 @@ import { renderWithProviders } from '../../testUtils/renderWithProviders';
 import Checkout, { PLACE_ORDER_SUCCESS_MESSAGE } from './Checkout';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { TestId } from '../../testUtils/TestId';
-import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestPizzas';
+import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestData/TestPizzas';
 import { initialCheckoutState } from '../../redux/Slices/Checkout/CheckoutSlice';
 import { Page } from '../../Navigation';
 import { rest } from 'msw';

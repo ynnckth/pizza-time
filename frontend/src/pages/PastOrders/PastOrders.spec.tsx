@@ -1,35 +1,11 @@
-import { renderWithProviders } from '../../testUtils/renderWithProviders';
-import { screen, waitFor } from '@testing-library/react';
+import {renderWithProviders} from '../../testUtils/renderWithProviders';
+import {screen, waitFor} from '@testing-library/react';
 import PastOrders from './PastOrders';
-import { rest } from 'msw';
-import { ordersBaseUrl } from '../../api/Order/OrderApi';
-import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestPizzas';
-import { TestId } from '../../testUtils/TestId';
-import { setupServer } from 'msw/node';
-import { Order } from '../../../generated';
-
-const samplePastOrders: Order[] = [
-  {
-    orderId: '0001',
-    orderItems: [pizzaMargherita, pizzaSalami],
-    customer: {
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@test.com',
-    },
-    orderDate: '2022-09-04T07:58:49.098Z',
-  },
-  {
-    orderId: '0002',
-    orderItems: [pizzaMargherita],
-    customer: {
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@test.com',
-    },
-    orderDate: '2022-09-04T07:58:49.098Z',
-  },
-];
+import {rest} from 'msw';
+import {ordersBaseUrl} from '../../api/Order/OrderApi';
+import {TestId} from '../../testUtils/TestId';
+import {setupServer} from 'msw/node';
+import {samplePastOrders} from '../../testUtils/TestData/TestOrders';
 
 // msw is used to intercept network requests
 export const handlers = [

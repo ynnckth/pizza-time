@@ -1,7 +1,7 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import Marketplace from './Marketplace';
 import { TestId } from '../../testUtils/TestId';
-import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestPizzas';
+import { pizzaMargherita, pizzaSalami } from '../../testUtils/TestData/TestPizzas';
 import { renderWithProviders } from '../../testUtils/renderWithProviders';
 import { pizzasBaseUrl } from '../../api/Pizza/PizzaApi';
 import { rest } from 'msw';
