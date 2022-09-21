@@ -24,6 +24,19 @@ describe('CheckoutForm', () => {
     await waitFor(() => expect(screen.queryAllByText('Required')).toHaveLength(3));
   });
 
+  it('should not submit if incorrect email address', async () => {
+    const onSubmit = jest.fn();
+    renderWithProviders(<CheckoutForm onSubmit={onSubmit} />);
+
+    fireEvent.change(screen.getByTestId(TestId.CHECKOUT_FORM_FIRST_NAME), { target: { value: 'John' } });
+    fireEvent.change(screen.getByTestId(TestId.CHECKOUT_FORM_LAST_NAME), { target: { value: 'Doe' } });
+    fireEvent.change(screen.getByTestId(TestId.CHECKOUT_FORM_EMAIL), { target: { value: 'john.doe@' } });
+    fireEvent.click(screen.getByTestId(TestId.CHECKOUT_PLACE_ORDER_BUTTON));
+
+    await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
+    await waitFor(() => expect(screen.getByText('Invalid email address')).toBeVisible());
+  });
+
   it('should submit form given valid inputs', async () => {
     const onSubmit = jest.fn();
     const formValues: CheckoutFormValues = { firstName: 'John', lastName: 'Doe', email: 'john.doe@test.com' };

@@ -4,7 +4,7 @@ import { renderWithProviders } from '../../testUtils/renderWithProviders';
 
 describe('PizzaCard', () => {
   // Update snapshot with "jest --updateSnapshot"
-  it('Renders snapshot correctly', () => {
+  it('should match previous snapshot', () => {
     const { asFragment } = renderWithProviders(<PizzaCard pizza={pizzaMargherita} />);
     expect(asFragment()).toMatchSnapshot();
   });
