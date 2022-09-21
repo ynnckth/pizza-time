@@ -19,5 +19,9 @@ export const placeOrder = async (placeOrderRequest: PlaceOrderRequest): Promise<
     },
     body: JSON.stringify(placeOrderRequest),
   });
-  return response.json();
+  const responseBody = await response.json();
+  if (!response.ok) {
+    throw new Error(responseBody.errorMessage);
+  }
+  return responseBody;
 };
