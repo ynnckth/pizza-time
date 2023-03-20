@@ -37,9 +37,13 @@ export const placeOrder = createAsyncThunk(
   'checkout/placeOrder',
   async (placeOrderAction: PlaceOrderAction, thunkAPI) => {
     thunkAPI.dispatch(setSelectedTabIndex(getTabIndexForPage(Page.PAST_ORDERS)));
-    const response = await placeOrderApi(placeOrderAction.placeOrderRequest);
-    placeOrderAction.navigate(Page.PAST_ORDERS);
-    return response;
+    try {
+      const response = await placeOrderApi(placeOrderAction.placeOrderRequest);
+      placeOrderAction.navigate(Page.PAST_ORDERS);
+      return response;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
+    }
   }
 );
 
@@ -73,7 +77,7 @@ export const checkoutSlice = createSlice({
       })
       .addCase(placeOrder.fulfilled, (state, action) => {
         state.placeOrderStatus = RequestStatus.SUCCESSFUL;
-        state.pastOrders.push(action.payload);
+        state.pastOrders.push(action.payload!);
         state.orderItems = [];
         toast.success(PLACE_ORDER_SUCCESS_MESSAGE);
       })
